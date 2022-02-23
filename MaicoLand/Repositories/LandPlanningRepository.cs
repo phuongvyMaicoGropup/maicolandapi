@@ -16,7 +16,7 @@ namespace MaicoLand.Repositories
         public LandPlanningRepository(
             IOptions<MaicoLandDatabaseSettings> maicoLandDatabaseSettings)
         {
-            var mongoClient = new MongoClient("mongodb://localhost:27017");
+            var mongoClient = new MongoClient("mongodb+srv://phuongvy:123Phuongvy@cluster0.90hui.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
             //maicoLandDatabaseSettings.Value.ConnectionString);
 
             var mongoDatabase = mongoClient.GetDatabase("MaicoLand");

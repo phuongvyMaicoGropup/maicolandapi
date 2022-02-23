@@ -14,16 +14,12 @@ namespace MaicoLand.Repositories
         private readonly IMongoCollection<News> _newsCollection;
 
         public NewsRepository(
-            IOptions<MaicoLandDatabaseSettings> maicoLandDatabaseSettings)
+            IMaicoLandDatabaseSettings settings)
         {
-            var mongoClient = new MongoClient("mongodb+srv://phuongvy:123Phuongvy@cluster0.90hui.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
-            //maicoLandDatabaseSettings.Value.ConnectionString);
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
 
-            var mongoDatabase = mongoClient.GetDatabase("MaicoLand");
-            //maicoLandDatabaseSettings.Value.DatabaseName);
-
-            _newsCollection = mongoDatabase.GetCollection<News>("News");
-                //maicoLandDatabaseSettings.Value.NewsCollectionName);
+            _newsCollection = database.GetCollection<News>("News");
         }
 
         public async Task<List<News>> GetAsync() =>

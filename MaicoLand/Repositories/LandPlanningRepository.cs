@@ -14,16 +14,15 @@ namespace MaicoLand.Repositories
         private readonly IMongoCollection<LandPlanning> _landPlanningCollection;
 
         public LandPlanningRepository(
-            IOptions<MaicoLandDatabaseSettings> maicoLandDatabaseSettings)
+            IMaicoLandDatabaseSettings settings)
         {
-            var mongoClient = new MongoClient("mongodb+srv://phuongvy:123Phuongvy@cluster0.90hui.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
-            //maicoLandDatabaseSettings.Value.ConnectionString);
+            
 
-            var mongoDatabase = mongoClient.GetDatabase("MaicoLand");
-            //maicoLandDatabaseSettings.Value.DatabaseName);
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
 
-            _landPlanningCollection = mongoDatabase.GetCollection<LandPlanning>("LandPlanning");
-            //maicoLandDatabaseSettings.Value.NewsCollectionName);
+            _landPlanningCollection = database.GetCollection<LandPlanning>("LandPlanning");
+
         }
 
         public async Task<List<LandPlanning>> GetAsync() =>

@@ -5,7 +5,6 @@ E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\MaicoLand.deps.json
 E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\MaicoLand.runtimeconfig.json
 E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\MaicoLand.runtimeconfig.dev.json
 E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\MaicoLand.dll
-E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\ref\MaicoLand.dll
 E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\MaicoLand.pdb
 E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\Microsoft.OpenApi.dll
 E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
@@ -123,3 +122,4 @@ E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\Microsoft.IdentityModel.Js
 E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
 E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+E:\MaiCoLand\api\MaicoLand\MaicoLand\bin\Debug\net5.0\ref\MaicoLand.dll

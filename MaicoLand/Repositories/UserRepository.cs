@@ -23,20 +23,16 @@ namespace MaicoLand.Repositories
         private readonly IConfiguration _config; 
 
         public UserRepository(
-            IOptions<MaicoLandDatabaseSettings> maicoLandDatabaseSettings, UserManager<AppUser> userManager, 
+            IMaicoLandDatabaseSettings settings, UserManager<AppUser> userManager, 
             SignInManager<AppUser> signInManager, IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _config = config; 
-            var mongoClient = new MongoClient("mongodb+srv://phuongvy:123Phuongvy@cluster0.90hui.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
-            //maicoLandDatabaseSettings.Value.ConnectionString);
+            _config = config;
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
 
-            var mongoDatabase = mongoClient.GetDatabase("MaicoLand");
-            //maicoLandDatabaseSettings.Value.DatabaseName);
-
-            _userCollection = mongoDatabase.GetCollection<User>("User");
-            //maicoLandDatabaseSettings.Value.NewsCollectionName);
+            _userCollection = database.GetCollection<User>("User");
         }
 
         public async Task<string> Authenticate(LoginRequest request)

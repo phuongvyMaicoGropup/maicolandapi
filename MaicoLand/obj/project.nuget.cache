@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BVX/uDh82tChZJ7LdVdjS2QmkkobO702EHdBSbfKAoBV/KvexEfqjd/Nqm0uukWumzEBD8phl0yQ2S3P82gjmw==",
+  "dgSpecHash": "oppkV+pi4tYF3GZMWiNvs4VQI3ktMsV25pBP74LvVq1JD1tSepLtqnGcHIpjKfpf/lqpj/mxxPtYX8kwBvLptA==",
   "success": true,
-  "projectFilePath": "E:\\MaicoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj",
+  "projectFilePath": "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\aspnetcore.identity.mongodbcore\\3.1.2\\aspnetcore.identity.mongodbcore.3.1.2.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",

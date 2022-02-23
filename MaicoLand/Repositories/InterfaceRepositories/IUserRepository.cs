@@ -13,8 +13,9 @@ namespace MaicoLand.Repositories.InterfaceRepositories
 
         public Task<User?> GetAsync(string id);
         public Task<bool> Register(RegisterRequest request);
+        public Task Logout();
 
-        public Task UpdateAsync(string id, News updatedUser);
+        public Task UpdateAsync(string id, User updatedUser);
 
         public Task RemoveAsync(string id);
         public Task<string> Authenticate(LoginRequest request);

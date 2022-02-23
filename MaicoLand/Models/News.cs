@@ -2,6 +2,7 @@
 using MongoDbGenericRepository.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,10 +13,13 @@ namespace MaicoLand.Models
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+        [Required]
 
         public string Id { set; get; }
         [BsonElement]
+        [Required]
         public string Title { set; get; }
+        [Required]
         [BsonElement]
         public string Content { set; get; }
         [BsonElement]

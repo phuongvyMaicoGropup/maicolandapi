@@ -11,13 +11,11 @@ namespace MaicoLand.Models
 
             public string DatabaseName { get; set; } = null!;
 
-            public string NewsCollectionName { get; set; } = null!;
     }
    
 
     public interface IMaicoLandDatabaseSettings
     {
-        string NewsCollectionName { get; set; }
         string ConnectionString { get; set; }
         string DatabaseName { get; set; }
     }

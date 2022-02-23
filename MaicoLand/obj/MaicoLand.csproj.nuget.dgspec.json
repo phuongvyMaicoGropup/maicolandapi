@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj": {}
+    "E:\\MaicoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj": {}
   },
   "projects": {
-    "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj": {
+    "E:\\MaicoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj",
+        "projectUniqueName": "E:\\MaicoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj",
         "projectName": "MaicoLand",
-        "projectPath": "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj",
+        "projectPath": "E:\\MaicoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\obj\\",
+        "outputPath": "E:\\MaicoLand\\api\\MaicoLand\\MaicoLand\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -47,6 +47,10 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[6.16.0, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.11.1, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",

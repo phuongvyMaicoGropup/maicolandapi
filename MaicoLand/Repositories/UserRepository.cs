@@ -86,29 +86,23 @@ namespace MaicoLand.Repositories
                 return true; 
             }
                 return false; 
-            
-            
-            
         }
 
-        public Task<List<User>> GetAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<List<User>> GetAsync() =>
+            await _userCollection.Find(_ => true).ToListAsync();
 
-        public Task<User> GetAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<User> GetAsync(string id)
+            => await _userCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-        public Task RemoveAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task RemoveAsync(string id)
+        => await _userCollection.DeleteOneAsync(x => x.Id == id);
 
-        public Task UpdateAsync(string id, News updatedUser)
+        public async Task UpdateAsync(string id, User updatedUser)
+        => await _userCollection.ReplaceOneAsync(x => x.Id == id, updatedUser);
+
+        public async Task Logout()
         {
-            throw new NotImplementedException();
+            await _signInManager.SignOutAsync();
         }
     }
 }

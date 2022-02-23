@@ -64,5 +64,12 @@ namespace MaicoLand.Controllers
 
             return item;
         }
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Logout()
+        //{
+        //    await _userRepository.Logout();
+        //    return Ok(); 
+                
+        //}
     }
 }

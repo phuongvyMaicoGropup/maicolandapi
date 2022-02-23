@@ -48,8 +48,8 @@ namespace MaicoLand
             services.AddIdentity<AppUser, AppRole>()
         .AddMongoDbStores<AppUser, AppRole, Guid>
         (
-                "mongodb://localhost:27017", "MaicoLand"
-            //mongoDbSettings.ConnectionString, mongoDbSettings.DatabaseName
+        //"mongodb://localhost:27017", "MaicoLand"
+        Configuration.GetConnectionString("DefaultConnection"), Configuration.GetConnectionString("DatabaseName")
         );
 
 

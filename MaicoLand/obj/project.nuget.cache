@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oLLeBRnbQtHrL3DRoHvTbjzBorV3CQMDS3rMeBJ0v9l2M9ho2Vl/tOqByI4DTrOVeA9nzAsvDh1IzT5odefo5A==",
+  "dgSpecHash": "BVX/uDh82tChZJ7LdVdjS2QmkkobO702EHdBSbfKAoBV/KvexEfqjd/Nqm0uukWumzEBD8phl0yQ2S3P82gjmw==",
   "success": true,
-  "projectFilePath": "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj",
+  "projectFilePath": "E:\\MaicoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\aspnetcore.identity.mongodbcore\\3.1.2\\aspnetcore.identity.mongodbcore.3.1.2.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
@@ -40,6 +40,7 @@
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.11.1\\microsoft.visualstudio.azure.containers.tools.targets.1.11.1.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\5.0.2\\microsoft.visualstudio.web.codegeneration.5.0.2.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.contracts\\5.0.2\\microsoft.visualstudio.web.codegeneration.contracts.5.0.2.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\5.0.2\\microsoft.visualstudio.web.codegeneration.core.5.0.2.nupkg.sha512",

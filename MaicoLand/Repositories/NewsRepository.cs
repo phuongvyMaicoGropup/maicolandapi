@@ -36,6 +36,7 @@ namespace MaicoLand.Repositories
             await _newsCollection.InsertOneAsync(newNews);
 
         public async Task UpdateAsync(string id, News updatedNews) =>
+
             await _newsCollection.ReplaceOneAsync(x => x.Id == id, updatedNews);
  
         public async Task RemoveAsync(string id) =>

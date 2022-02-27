@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "9XgNZwMDPYCaWFP1xTshhoeDThz4GLMlu9R8dBxdN7JORi649riBVSLyimYihQ8143sIojxVZ2tfyLSPwOXgTA==",
+  "dgSpecHash": "wq9XwaxAFirVMen58pJHChvmAyRfI1yp+CJ3emNgo1C/K1IZPWhc19h/MqObHEyq7ndIglfGm8DPnwMlzr9KdA==",
   "success": true,
   "projectFilePath": "/Users/andreatran/Workspace/Maico/maicoland-api/maicoland-api/MaicoLand/MaicoLand.csproj",
   "expectedPackageFiles": [
     "/Users/andreatran/.nuget/packages/aspnetcore.identity.mongodbcore/3.1.2/aspnetcore.identity.mongodbcore.3.1.2.nupkg.sha512",
+    "/Users/andreatran/.nuget/packages/awssdk/2.3.55.2/awssdk.2.3.55.2.nupkg.sha512",
     "/Users/andreatran/.nuget/packages/dnsclient/1.4.0/dnsclient.1.4.0.nupkg.sha512",
     "/Users/andreatran/.nuget/packages/humanizer.core/2.2.0/humanizer.core.2.2.0.nupkg.sha512",
     "/Users/andreatran/.nuget/packages/microsoft.aspnetcore.cryptography.internal/3.1.12/microsoft.aspnetcore.cryptography.internal.3.1.12.nupkg.sha512",
@@ -145,5 +146,16 @@
     "/Users/andreatran/.nuget/packages/system.xml.readerwriter/4.3.0/system.xml.readerwriter.4.3.0.nupkg.sha512",
     "/Users/andreatran/.nuget/packages/system.xml.xdocument/4.3.0/system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'AWSSDK 2.3.55.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "AWSSDK",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
 }

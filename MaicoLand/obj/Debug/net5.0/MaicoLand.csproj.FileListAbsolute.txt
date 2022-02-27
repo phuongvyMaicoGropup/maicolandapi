@@ -248,3 +248,4 @@ E:/MaiCoLand/api/MaicoLand/MaicoLand/bin/Debug/net5.0/ref/MaicoLand.dll
 /Users/andreatran/Workspace/Maico/maicoland-api/maicoland-api/MaicoLand/obj/Debug/net5.0/ref/MaicoLand.dll
 /Users/andreatran/Workspace/Maico/maicoland-api/maicoland-api/MaicoLand/obj/Debug/net5.0/MaicoLand.pdb
 /Users/andreatran/Workspace/Maico/maicoland-api/maicoland-api/MaicoLand/obj/Debug/net5.0/MaicoLand.genruntimeconfig.cache
+/Users/andreatran/Workspace/Maico/maicoland-api/maicoland-api/MaicoLand/bin/Debug/net5.0/AWSSDK.dll

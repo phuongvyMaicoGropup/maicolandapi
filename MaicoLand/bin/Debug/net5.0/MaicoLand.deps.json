@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "MaicoLand/1.0.0": {
         "dependencies": {
+          "AWSSDK": "2.3.55.2",
           "AspNetCore.Identity.MongoDbCore": "3.1.2",
           "Microsoft.IdentityModel.Tokens": "6.16.0",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.11.1",
@@ -346,6 +347,17 @@
         },
         "compile": {
           "lib/netcoreapp3.1/AspNetCore.Identity.MongoDbCore.dll": {}
+        }
+      },
+      "AWSSDK/2.3.55.2": {
+        "runtime": {
+          "lib/net45/AWSSDK.dll": {
+            "assemblyVersion": "2.3.55.2",
+            "fileVersion": "2.3.55.2"
+          }
+        },
+        "compile": {
+          "lib/net45/AWSSDK.dll": {}
         }
       },
       "DnsClient/1.4.0": {
@@ -3602,6 +3614,13 @@
       "sha512": "sha512-ichSW3Vs51f+Ol7Ska1jIOlKc+i2Am3UeNvGhhIb59MXOKyhZGpyulUnFdN62IpP779EkLrLf3ZMwSZ2bVgY+g==",
       "path": "aspnetcore.identity.mongodbcore/3.1.2",
       "hashPath": "aspnetcore.identity.mongodbcore.3.1.2.nupkg.sha512"
+    },
+    "AWSSDK/2.3.55.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zy/6psTOx9c8LaZqL1tUtiGKMpd35b16TNRctz/N6Qc6hqFeOjyZ5WVhn89szJkkZtotcMFyfq58Y2RfyRxxUg==",
+      "path": "awssdk/2.3.55.2",
+      "hashPath": "awssdk.2.3.55.2.nupkg.sha512"
     },
     "DnsClient/1.4.0": {
       "type": "package",

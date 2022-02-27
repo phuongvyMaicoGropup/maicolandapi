@@ -38,6 +38,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AWSSDK": {
+              "target": "Package",
+              "version": "[2.3.55.2, )"
+            },
             "AspNetCore.Identity.MongoDbCore": {
               "target": "Package",
               "version": "[3.1.2, )"

@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj": {}
+    "/Users/andreatran/Workspace/Maico/maicoland-api/maicoland-api/MaicoLand/MaicoLand.csproj": {}
   },
   "projects": {
-    "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj": {
+    "/Users/andreatran/Workspace/Maico/maicoland-api/maicoland-api/MaicoLand/MaicoLand.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj",
+        "projectUniqueName": "/Users/andreatran/Workspace/Maico/maicoland-api/maicoland-api/MaicoLand/MaicoLand.csproj",
         "projectName": "MaicoLand",
-        "projectPath": "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\MaicoLand.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "E:\\MaiCoLand\\api\\MaicoLand\\MaicoLand\\obj\\",
+        "projectPath": "/Users/andreatran/Workspace/Maico/maicoland-api/maicoland-api/MaicoLand/MaicoLand.csproj",
+        "packagesPath": "/Users/andreatran/.nuget/packages/",
+        "outputPath": "/Users/andreatran/Workspace/Maico/maicoland-api/maicoland-api/MaicoLand/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/andreatran/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -87,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/6.0.102/RuntimeIdentifierGraph.json"
         }
       }
     }

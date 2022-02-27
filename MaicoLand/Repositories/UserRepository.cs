@@ -42,16 +42,17 @@ namespace MaicoLand.Repositories
             if (user == null) return null; 
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe,true);
             if (!result.Succeeded) return null;
-            var userInfo = await GetAsync(user.Id.ToString());
+            var userInfo = await GetByEmailAsync(user.Email);
             var claims = new[]
             {
-                new Claim("Id", userInfo.Id),
-                new Claim("Email", userInfo.Email),
-                new Claim("UserName", userInfo.UserName),
-                new Claim("FirstName", userInfo.FirstName),
-                new Claim("LastName", userInfo.LastName),
-                new Claim("PhoneNumber", userInfo.PhoneNumber),
-                new Claim("Avatar", userInfo.PhotoURL),
+                new Claim("id", userInfo.Id),
+             
+                new Claim("email", userInfo.Email),
+                new Claim("username", userInfo.UserName),
+                new Claim("firstName", userInfo.FirstName),
+                new Claim("lastName", userInfo.LastName),
+                new Claim("phoneNumber", userInfo.PhoneNumber),
+                new Claim("photoURL", userInfo.PhotoURL),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -83,6 +84,8 @@ namespace MaicoLand.Repositories
                     FirstName = request.FirstName,
                     LastName = request.LastName,
                     UserName = request.UserName,
+                    PhotoURL = "",
+                    PhoneNumber="",
 
                 };
                 await _userCollection.InsertOneAsync(newUser);
@@ -96,6 +99,8 @@ namespace MaicoLand.Repositories
 
         public async Task<User> GetAsync(string id)
             => await _userCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        public async Task<User> GetByEmailAsync(string email)
+            => await _userCollection.Find(x => x.Email == email).FirstOrDefaultAsync();
 
         public async Task RemoveAsync(string id)
         => await _userCollection.DeleteOneAsync(x => x.Id == id);

@@ -46,7 +46,8 @@ namespace MaicoLand.Repositories
                         StorageClass = S3StorageClass.StandardInfrequentAccess,
                         PartSize = 6291456, // 6 MB.  
                         Key = fileName,
-                        CannedACL = S3CannedACL.PublicRead
+                        CannedACL = S3CannedACL.PublicRead,
+                        ContentType = uploadMeta.ContentType
                     };
                     //fileTransferUtilityRequest.Metadata.Add("param1", "Value1");
                     //fileTransferUtilityRequest.Metadata.Add("param2", "Value2");
@@ -59,6 +60,7 @@ namespace MaicoLand.Repositories
 
             catch (AmazonS3Exception amazonS3Exception)
             {
+
                 if (amazonS3Exception.ErrorCode != null &&
                     (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId")
                     ||
@@ -68,7 +70,7 @@ namespace MaicoLand.Repositories
                 }
                 else
                 {
-                    return ("memeo");
+                    return (amazonS3Exception.ErrorCode.ToString());
                 }
             }
         }

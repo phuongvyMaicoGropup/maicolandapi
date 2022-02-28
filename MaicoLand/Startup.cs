@@ -77,12 +77,11 @@ namespace MaicoLand
             //Enable Cors
             app.UseCors(options => options.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
 
-            if (env.IsDevelopment())
-            {
+            
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MaicoLand v1"));
-            }
+            
 
             app.UseHttpsRedirection();
 

@@ -20,9 +20,11 @@ namespace MaicoLand.Repositories
         {
              accessKey = settings.AccessKey;
              secretKey = settings.SecretKey;
-            AmazonS3Config config = new AmazonS3Config();
-            config.ServiceURL = "https://hn.ss.bfcplatform.vn";
-            config.ForcePathStyle = true;
+            AmazonS3Config config = new AmazonS3Config
+            {
+                ServiceURL = "https://hn.ss.bfcplatform.vn",
+                ForcePathStyle = true
+            };
             client = new AmazonS3Client(
               accessKey,
               secretKey,

@@ -46,7 +46,6 @@ namespace MaicoLand.Repositories
             var claims = new[]
             {
                 new Claim("id", userInfo.Id),
-             
                 new Claim("email", userInfo.Email),
                 new Claim("username", userInfo.UserName),
                 new Claim("firstName", userInfo.FirstName),

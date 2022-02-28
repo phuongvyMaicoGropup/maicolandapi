@@ -26,7 +26,7 @@ namespace MaicoLand.Repositories
             await _newsCollection.Find(_ => true).ToListAsync();
 
         public async Task<News> GetAsync(string id) =>
-            await _newsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            await _newsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();    
 
         public async Task CreateAsync(News newNews) =>
             await _newsCollection.InsertOneAsync(newNews);

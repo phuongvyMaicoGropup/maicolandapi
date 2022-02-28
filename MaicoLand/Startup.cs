@@ -39,19 +39,21 @@ namespace MaicoLand
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 
+
             services.Configure<MaicoLandDatabaseSettings>(Configuration.GetSection(nameof(MaicoLandDatabaseSettings)));
 
             services.AddSingleton<IMaicoLandDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<MaicoLandDatabaseSettings>>().Value);
-            
+
 
 
             services.AddIdentity<AppUser, AppRole>()
         .AddMongoDbStores<AppUser, AppRole, Guid>
         (
         mongoDbSettings.ConnectionString, mongoDbSettings.DatabaseName
-        ); 
-            
+        );
+
+
 
 
 

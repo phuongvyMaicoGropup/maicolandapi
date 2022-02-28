@@ -1,9 +1,9 @@
 ﻿using System;
 namespace MaicoLand.Models
 {
-    public class FIleInfo
+    public class FileInfo
     {
-        public FIleInfo()
+        public FileInfo()
         {
 
         }

@@ -14,10 +14,10 @@ namespace MaicoLand.Controllers
     public class ImageController : Controller
     {
 
-        private IImageRepository _imageRepository; 
+        private IImageRepository _imageRepository;
         public ImageController(IImageRepository imageRepository)
         {
-            _imageRepository = imageRepository; 
+            _imageRepository = imageRepository;
         }
         //[HttpPost]
 
@@ -25,51 +25,20 @@ namespace MaicoLand.Controllers
         //{
 
         //}
-        
+
         [HttpGet("GetUploadLink")]
 
         public string GetUploadLink(string path, string contentType)
         {
-            var meta = new FIleInfo
+            var meta = new FileInfo
             {
                 Path = path,
                 ContentType = contentType,
             };
-            return _imageRepository.GetUploadLink(meta);
+            return _imageRepository.UploadFile(meta);
         }
 
 
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
 
 
     }

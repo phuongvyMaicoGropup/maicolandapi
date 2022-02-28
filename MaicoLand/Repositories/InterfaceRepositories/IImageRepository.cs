@@ -14,8 +14,8 @@ namespace MaicoLand.Repositories.InterfaceRepositories
 
         //public Task RemoveAsync(string id);
         //public Task UpFile();
-        public string UploadFile(string filePath);
+        public string UploadFile(FileInfo uploadMeta);
         public void DeleteFile(string filePath);
-        public string GetUploadLink(FIleInfo uploadMeta); 
+        public string GetUploadLink(FileInfo uploadMeta); 
     }
 }

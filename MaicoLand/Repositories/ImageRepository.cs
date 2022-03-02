@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Amazon.S3;
+using Amazon.S3.Model;
 using Amazon.S3.Transfer;
 using MaicoLand.Models;
 using MaicoLand.Repositories.InterfaceRepositories;
@@ -36,6 +37,33 @@ namespace MaicoLand.Repositories
             var fileTransferUtility = new TransferUtility(client);
             try
             {
+                HeadersCollection headers = new HeadersCollection();
+
+                headers.ContentType = "image/png";
+                headers.Expires = DateTime.Now.AddHours(3);
+                //                esponse Headers
+
+                //HTTP / 1.1 200 OK
+                //  Server: ASP.NET Development Server / 10.0.0.0
+                //Date: Sun, 28 Aug 2011 13:54:50 GMT
+                //X - AspNet - Version: 4.0.30319
+                //Cache - Control: private
+                //  Content-Type: image/jpeg
+                //Content-Length: 24255
+                //Connection: Close
+
+
+                //Request Headersview source
+                //Host localhost:50715
+                //User-Agent Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0
+                //Accept image/png,image/*;q=0.8,*/*;q=0.5
+                //Accept-Language en-us,en;q=0.5
+                //Accept-Encoding gzip, deflate
+                //Accept-Charset ISO-8859-1, utf-8; q=0.7,*;q=0.7
+                //Connection keep-alive
+                //Referer http://localhost:50715/MySite/SiteHome.html
+                //Pragma no-cache
+                //Cache-Control no-cache
                 var fileName = "/images/"+Guid.NewGuid().ToString(); 
               
                    
@@ -46,12 +74,15 @@ namespace MaicoLand.Repositories
                         StorageClass = S3StorageClass.StandardInfrequentAccess,
                         PartSize = 6291456, // 6 MB.  
                         Key = fileName,
+                       
                         CannedACL = S3CannedACL.PublicRead,
-                        ContentType = uploadMeta.ContentType
-                    };
-                    //fileTransferUtilityRequest.Metadata.Add("param1", "Value1");
-                    //fileTransferUtilityRequest.Metadata.Add("param2", "Value2");
-                    fileTransferUtility.Upload(fileTransferUtilityRequest);
+                        ContentType = uploadMeta.ContentType,
+                          //Headers =headers,
+                     
+                                            };
+                fileTransferUtilityRequest.Metadata.Add("param1", "Value1");
+                fileTransferUtilityRequest.Metadata.Add("param2", "Value2");
+                fileTransferUtility.Upload(fileTransferUtilityRequest);
                     fileTransferUtility.Dispose();
                 return "https://maico-hub-record.ss-hn-1.bizflycloud.vn/maicoland/" + fileName; 
 
@@ -70,7 +101,8 @@ namespace MaicoLand.Repositories
                 }
                 else
                 {
-                    return (amazonS3Exception.ErrorCode.ToString());
+                    var t = amazonS3Exception.ErrorType.ToString()+amazonS3Exception.Message;
+                    return (t + "-"+ amazonS3Exception.ErrorCode.ToString());
                 }
             }
         }

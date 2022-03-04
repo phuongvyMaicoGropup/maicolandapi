@@ -35,7 +35,7 @@ namespace MaicoLand.Controllers
                 Path = path,
                 ContentType = contentType,
             };
-            return _imageRepository.UploadFile(meta);
+            return _imageRepository.GetUploadLink(meta);
         }
 
 

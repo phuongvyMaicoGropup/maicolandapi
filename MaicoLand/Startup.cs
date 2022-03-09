@@ -34,7 +34,7 @@ namespace MaicoLand
         {
             var mongoDbSettings = Configuration.GetSection(nameof(MaicoLandDatabaseSettings)).Get<MaicoLandDatabaseSettings>();
             services.AddTransient<INewsRepository, NewsRepository>();
-            services.AddTransient<IImageRepository, ImageRepository>();
+            services.AddTransient<IFileRepository, FileRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
@@ -50,6 +50,7 @@ namespace MaicoLand
             services.AddIdentity<AppUser, AppRole>()
         .AddMongoDbStores<AppUser, AppRole, Guid>
         (
+
         mongoDbSettings.ConnectionString, mongoDbSettings.DatabaseName
         );
 

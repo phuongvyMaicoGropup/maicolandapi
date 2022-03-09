@@ -10,7 +10,7 @@ namespace MaicoLand.Repositories.InterfaceRepositories
     {
         public Task<List<News>> GetAsync();
 
-        public Task<News?> GetAsync(string id);
+        public Task<News> GetAsync(string id);
         public Task CreateAsync(News newNews);
 
         public Task UpdateAsync(string id, News updatedNews);

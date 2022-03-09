@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using Amazon.S3.Model;
 using MaicoLand.Models;
@@ -19,51 +21,26 @@ namespace MaicoLand.Controllers
     public class ImageController : Controller
     {
 
-        private IImageRepository _imageRepository;
-        public ImageController(IImageRepository imageRepository)
+        private IFileRepository _fileRepository;
+        public ImageController(IFileRepository fileRepository)
         {
-            _imageRepository = imageRepository;
+            _fileRepository = fileRepository;
         }
 
-        [HttpPost(nameof(Upload))]  
-        public IActionResult Upload(List<IFormFile> formFiles,  string subDirectory)
+        
+        [HttpGet("getpresignedurl")]
+        public string GetPresignedUrl(string path,string contentType)
         {
-            try
-            {
-                _imageRepository.UploadFile(formFiles, subDirectory);
-
-                return Ok(new { formFiles.Count, Size = _imageRepository.SizeConverter(formFiles.Sum(f => f.Length)) });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-        [HttpGet("GetFile")]
-        public async Task<String> GetFile(string path , string key)
-        {
-            HttpResponseMessage result = null;
-            try
-            {
-            var file = await _imageRepository.getFile(path,key);
-
-                using (var stream = file)
-                {
-                    Console.WriteLine(stream.Key);
-                    Console.WriteLine($"Kích thước stream {stream.ContentLength} bytes / Vị trí {stream.BucketName}");
-                    
-                    Console.WriteLine($"{stream.C}");
-                    //Console.WriteLine($"Stream có thể : Đọc {stream.CanRead} -  Ghi {stream.CanWrite} - Seek {stream.CanSeek} - Timeout {stream.CanTimeout} ");
-                }
-                return file.ToString(); 
-            }
-            catch (Exception ex)
-            {
-                return ex.ToString();
-            }
-
+            return _fileRepository.GetUploadLinkAsync(path,contentType);
         }
 
+        [HttpGet("GetLink")]
+        public string GetLinkFromServer(string path)
+        {
+            return _fileRepository.GetLinkFile(path);
+        }
+
+        
 
 
     }

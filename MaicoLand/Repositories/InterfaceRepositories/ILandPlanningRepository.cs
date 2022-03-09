@@ -10,7 +10,7 @@ namespace MaicoLand.Repositories.InterfaceRepositories
     {
         public Task<List<LandPlanning>> GetAsync();
 
-        public Task<LandPlanning?> GetAsync(string id);
+        public Task<LandPlanning> GetAsync(string id);
         public Task CreateAsync(LandPlanning newLandPlanning);
 
         public Task UpdateAsync(string id, LandPlanning updatedLandPlanning);

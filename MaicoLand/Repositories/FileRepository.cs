@@ -13,10 +13,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MaicoLand.Repositories
 {
-    public class ImageRepository : IImageRepository
+    public class FileRepository : IFileRepository
     {
          string url  = "https://localhost:5001/api/Image/UpFile";
-        private IHostingEnvironment _hostingEnvironment;
         private AmazonS3Client client;
         public string accessKey;
         public string secretKey;
@@ -24,15 +23,13 @@ namespace MaicoLand.Repositories
         private AmazonS3Config config;
         private static string _bucketSubdirectory = String.Empty;
 
-        public ImageRepository(IMaicoLandDatabaseSettings settings, IHostingEnvironment hostingEnvironment)
+        public FileRepository(IMaicoLandDatabaseSettings settings)
         {
             accessKey = settings.AccessKey;
             secretKey = settings.SecretKey;
-            _hostingEnvironment = hostingEnvironment; 
              //config = new AmazonS3Config();
             bucketName = settings.BucketName;
             config = new AmazonS3Config();
-            //config.ServiceURL = "https://ss-hn-1.bizflycloud.vn";
             config.ServiceURL= "https://hn.ss.bfcplatform.vn";
             config.ForcePathStyle = true;
             client = new AmazonS3Client(
@@ -66,12 +63,12 @@ namespace MaicoLand.Repositories
         }
         public  string GetUploadLinkAsync(string path , string contentType) 
         {
-           
+            string fileName =path + "/"+ Guid.NewGuid().ToString();  
             GetPreSignedUrlRequest request_generate_url = new GetPreSignedUrlRequest();
             request_generate_url.ContentType = contentType;
             request_generate_url.BucketName = bucketName;
-            request_generate_url.Key = path;
-            request_generate_url.Expires = DateTime.Now.AddMinutes(30);
+            request_generate_url.Key = fileName;
+            request_generate_url.Expires = DateTime.Now.AddMinutes(60);
             request_generate_url.Verb = HttpVerb.PUT;
 
 
@@ -80,38 +77,16 @@ namespace MaicoLand.Repositories
 
 
         }
-        
-        public void UploadFile(List<IFormFile> files, string subDirectory)
+        public string GetLinkFile(string path)
         {
-            subDirectory = subDirectory ?? string.Empty;
-            var target = Path.Combine(_hostingEnvironment.ContentRootPath, subDirectory);
-            
-            Directory.CreateDirectory(target);
-            using (HttpClient client = new HttpClient())
-            {
-
-            files.ForEach(async file =>
-            {
-                
-                string fileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(file.FileName);
-                if (file.Length <= 0) return;
-                var filePath = Path.Combine(target, fileName);
-                var link = GetUploadLinkAsync(target, file.ContentType);
-                using (var stream = file.OpenReadStream())
-                {
-                    var contentData = new StreamContent(stream);
-                    contentData.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType);
-                    var result = await client.PutAsync(link, contentData).ConfigureAwait(false);
-
-                    await file.CopyToAsync(stream);
-                    Console.WriteLine(result);
-                }
-            });
-            }
-
-            
-
+            GetPreSignedUrlRequest request_generate_url = new GetPreSignedUrlRequest();
+            request_generate_url.BucketName = bucketName; 
+            request_generate_url.Key = path;
+            request_generate_url.Expires = DateTime.Now.AddMinutes(60);
+            return client.GetPreSignedURL(request_generate_url); 
         }
+        
+        
         public string SizeConverter(long bytes)
         {
             var fileSize = new decimal(bytes);
@@ -133,15 +108,39 @@ namespace MaicoLand.Repositories
                     return "n/a";
             }
         }
-        public async Task<GetObjectResponse>  getFile(string path , string key) 
+        public async Task<FileResponseResult>  GetFile(string path , string key) 
         {
-            GetObjectRequest request_download = new GetObjectRequest();
-            request_download.BucketName = bucketName;
-            request_download.Key = path + key;
-            GetObjectResponse response = await client.GetObjectAsync(request_download);
+            try
+            {
 
-            //await response.WriteResponseStreamToFileAsync("/images/",true,System.Threading.CancellationToken.None);
-            return response; 
+                GetObjectRequest request_download = new GetObjectRequest();
+                request_download.BucketName = bucketName;
+                request_download.Key = path + key;
+                GetObjectResponse response = await client.GetObjectAsync(request_download);
+                //if (response.Headers.ContentType == "text/plain")
+                //{
+                using (Stream responseStream = response.ResponseStream)
+                {
+                    Console.WriteLine("Success");
+                    var bytes = ReadStream(responseStream);
+                    var download = new FileContentResult(bytes, response.Headers.ContentType);
+                    download.FileDownloadName = key;
+
+                    var result = new FileResponseResult(true, download);
+                    //Console.WriteLine(result.file.ContentType)
+                    Console.WriteLine(result.file.FileContents);
+                    return result;
+                }
+            }
+
+            //}
+
+            catch (Exception e)
+            {
+                return new FileResponseResult(false);
+            }
+            return new FileResponseResult(false);
+
         }
         public static byte[] ReadStream(Stream responseStream)
         {
@@ -157,5 +156,9 @@ namespace MaicoLand.Repositories
             }
         }
 
+        public Task<HttpResponseMessage> Upload(Models.FileInfo uploadMeta)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

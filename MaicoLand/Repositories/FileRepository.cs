@@ -49,6 +49,7 @@ namespace MaicoLand.Repositories
                     var fileContent = new ByteArrayContent(File.ReadAllBytes(fileInfo.FullName));
                     multipartFormDataContent.Add(fileContent, "file", fileInfo.Name);
                     return httpClient.PostAsync("upload", multipartFormDataContent);
+
                 }
                 catch
                 {
@@ -63,11 +64,20 @@ namespace MaicoLand.Repositories
         }
         public  string GetUploadLinkAsync(string path , string contentType) 
         {
-            string fileName =path + "/"+ Guid.NewGuid().ToString();  
+            string extension = "";
+            switch (contentType)
+            {
+                case "image/png":
+                    extension = ".png";
+                    break;
+                default:
+                    break; 
+            }
+            string fileName =path + "/"+ Guid.NewGuid().ToString()+extension;  
             GetPreSignedUrlRequest request_generate_url = new GetPreSignedUrlRequest();
             request_generate_url.ContentType = contentType;
             request_generate_url.BucketName = bucketName;
-            request_generate_url.Key = fileName;
+            request_generate_url.Key = fileName     ;
             request_generate_url.Expires = DateTime.Now.AddMinutes(60);
             request_generate_url.Verb = HttpVerb.PUT;
 

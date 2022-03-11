@@ -22,8 +22,10 @@ namespace MaicoLand.Repositories
             _newsCollection = database.GetCollection<News>("News");
         }
 
-        public async Task<List<News>> GetAsync() =>
-            await _newsCollection.Find(_ => true).ToListAsync();
+        public  PagedList<News> Get(PagingParameter pagingParameter)
+        {
+            return PagedList<News>.ToPagedList(_newsCollection.AsQueryable<News>(), pagingParameter.pageNumber, pagingParameter.pageSize);
+        }
 
         public async Task<News> GetAsync(string id) =>
             await _newsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();    

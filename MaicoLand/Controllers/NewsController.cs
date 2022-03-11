@@ -3,6 +3,7 @@ using MaicoLand.Repositories.InterfaceRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,21 @@ namespace MaicoLand.Controllers
             _newsRepository = newsRepository;
         }
         [HttpGet("read")]
-        public async Task<List<News>> Get() =>
-        await _newsRepository.GetAsync();
+        public IActionResult Get([FromQuery]PagingParameter pagingParameter) {
+
+
+            var newsList = _newsRepository.Get(pagingParameter);
+            var metaData = new
+            {
+                newsList.TotalCount,
+                newsList.PageSize,
+                newsList.CurrentPage,
+                newsList.HasNext,
+                newsList.HasPrevious
+            };
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
+            return Ok(newsList);
+        }
 
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<News>> Get(string id)

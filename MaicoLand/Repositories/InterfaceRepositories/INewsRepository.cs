@@ -8,7 +8,7 @@ namespace MaicoLand.Repositories.InterfaceRepositories
 {
     public interface INewsRepository
     {
-        public Task<List<News>> GetAsync();
+        public PagedList<News> Get(PagingParameter pagingParameter);
 
         public Task<News> GetAsync(string id);
         public Task CreateAsync(News newNews);

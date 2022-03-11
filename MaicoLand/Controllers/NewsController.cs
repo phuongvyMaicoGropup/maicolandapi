@@ -37,11 +37,21 @@ namespace MaicoLand.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(News newNews)
+        public async Task<IActionResult> Post(NewsRequest newNews)
         {
-            await _newsRepository.CreateAsync(newNews);
+            var newsInfo = new News()
+            {
+                Title = newNews.Title,
+                Content = newNews.Content,
+                HashTags = newNews.HashTags,
+                ImageUrl = newNews.ImageUrl,
+                CreateDate = DateTime.Now,
+                UpdateDate = DateTime.Now,
+                CreatedBy = newNews.CreateBy
+            }; 
+            await _newsRepository.CreateAsync(newsInfo);
 
-            return CreatedAtAction(nameof(Get), new { id = newNews.Id }, newNews);
+            return CreatedAtAction(nameof(Get), new { id = newsInfo.Id }, newNews);
         }
 
         [HttpPut("{id:length(24)}")]

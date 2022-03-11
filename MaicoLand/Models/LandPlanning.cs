@@ -30,7 +30,7 @@ namespace MaicoLand.Models
         [BsonElement]
         public double LandArea { set; get; }
         [BsonElement]
-        public string FilePdf { set; get; }
+        public string FilePdfUrl { set; get; }
         [BsonElement]
         public DateTime UpdateDate { set; get; }
         [BsonElement]

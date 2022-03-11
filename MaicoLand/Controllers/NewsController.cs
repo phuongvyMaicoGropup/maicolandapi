@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MaicoLand.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/news")]
     [ApiController]
     public class NewsController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace MaicoLand.Controllers
         {
             _newsRepository = newsRepository;
         }
-        [HttpGet]
+        [HttpGet("read")]
         public async Task<List<News>> Get() =>
         await _newsRepository.GetAsync();
 
@@ -36,7 +36,7 @@ namespace MaicoLand.Controllers
             return news;
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> Post(NewsRequest newNews)
         {
             var newsInfo = new News()

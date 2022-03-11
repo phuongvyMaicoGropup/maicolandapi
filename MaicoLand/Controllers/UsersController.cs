@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MaicoLand.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UsersController : ControllerBase
     {

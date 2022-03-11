@@ -17,12 +17,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MaicoLand.Controllers
 {
-    [Route("api/[controller]")]
-    public class ImageController : Controller
+    [Route("api/file")]
+    public class FileController : Controller
     {
 
         private IFileRepository _fileRepository;
-        public ImageController(IFileRepository fileRepository)
+        public FileController(IFileRepository fileRepository)
         {
             _fileRepository = fileRepository;
         }
@@ -34,7 +34,7 @@ namespace MaicoLand.Controllers
             return _fileRepository.GetUploadLinkAsync(path,contentType);
         }
 
-        [HttpGet("GetLink")]
+        [HttpGet("getlink")]
         public string GetLinkFromServer(string path)
         {
             return _fileRepository.GetLinkFile(path);

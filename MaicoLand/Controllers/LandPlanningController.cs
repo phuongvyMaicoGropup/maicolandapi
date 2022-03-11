@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MaicoLand.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/landplanning")]
     [ApiController]
     public class LandPlanningController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace MaicoLand.Controllers
         {
             _landPlanningRepository = landPlanningRepository;
         }
-        [HttpGet]
+        [HttpGet("read")]
         public async Task<List<LandPlanning>> Get() =>
         await _landPlanningRepository.GetAsync();
 
@@ -36,7 +36,7 @@ namespace MaicoLand.Controllers
             return item;
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> Post(LandPlanningRequest newLandPlanning)
         {
             var landInfo = new LandPlanning()
@@ -48,7 +48,7 @@ namespace MaicoLand.Controllers
                 ExpirationDate = newLandPlanning.ExpirationDate,
                 CreatedBy= newLandPlanning.CreatedBy,
                 Content = newLandPlanning.Content,
-                FilePdf = newLandPlanning.FilePdfUrl,
+                FilePdfUrl = newLandPlanning.FilePdfUrl,
                 LandArea = newLandPlanning.LandArea,
                 LeftTop = newLandPlanning.LeftTop,
                 LeftBottom = newLandPlanning.LeftBottom,

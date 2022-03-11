@@ -8,7 +8,7 @@ namespace MaicoLand.Repositories.InterfaceRepositories
 {
     public interface ILandPlanningRepository
     {
-        public PagedList<LandPlanning> Get();
+        public PagedList<LandPlanning> Get(PagingParameter pagingParameter);
 
         public Task<LandPlanning> GetAsync(string id);
         public Task CreateAsync(LandPlanning newLandPlanning);

@@ -71,7 +71,7 @@ namespace MaicoLand.Controllers
                
 
     };
-            await _landPlanningRepository.CreateAsync(landInfo[FromQuery]PagingParameter pagingParameter);
+            await _landPlanningRepository.CreateAsync( landInfo);
 
             return CreatedAtAction(nameof(Get), new { id = landInfo.Id }, newLandPlanning);
         }

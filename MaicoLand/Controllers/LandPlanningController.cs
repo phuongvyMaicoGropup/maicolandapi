@@ -2,6 +2,7 @@
 using MaicoLand.Repositories.InterfaceRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,11 +37,30 @@ namespace MaicoLand.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(LandPlanning newLandPlanning)
+        public async Task<IActionResult> Post(LandPlanningRequest newLandPlanning)
         {
-            await _landPlanningRepository.CreateAsync(newLandPlanning);
+            var landInfo = new LandPlanning()
+            {
+                ImageUrl = newLandPlanning.ImageUrl,
+                Title = newLandPlanning.Title,
+                CreateDate = DateTime.Now,
+                UpdateDate = DateTime.Now,
+                ExpirationDate = newLandPlanning.ExpirationDate,
+                CreatedBy= newLandPlanning.CreatedBy,
+                Content = newLandPlanning.Content,
+                FilePdf = newLandPlanning.FilePdfUrl,
+                LandArea = newLandPlanning.LandArea,
+                IsValid = newLandPlanning.ExpirationDate > DateTime.Now ? true : false,
+                LeftTop = newLandPlanning.LeftTop,
+                LeftBottom = newLandPlanning.LeftBottom,
+                RightBottom = newLandPlanning.RightBottom,
+                RightTop = newLandPlanning.RightTop,
+               
 
-            return CreatedAtAction(nameof(Get), new { id = newLandPlanning.Id }, newLandPlanning);
+    };
+            await _landPlanningRepository.CreateAsync(landInfo);
+
+            return CreatedAtAction(nameof(Get), new { id = landInfo.Id }, newLandPlanning);
         }
 
         [HttpPut("{id:length(24)}")]

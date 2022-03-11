@@ -70,10 +70,10 @@ namespace MaicoLand.Repositories
                 case "image/png":
                     extension = ".png";
                     break;
-                default:
+                 default:
                     break; 
             }
-            string fileName =path + "/"+ Guid.NewGuid().ToString()+extension;  
+            string fileName =path + "/"+ Guid.NewGuid().ToString() + extension;  
             GetPreSignedUrlRequest request_generate_url = new GetPreSignedUrlRequest();
             request_generate_url.ContentType = contentType;
             request_generate_url.BucketName = bucketName;

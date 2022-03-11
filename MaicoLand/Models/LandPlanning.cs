@@ -9,6 +9,8 @@ namespace MaicoLand.Models
 {
     public class LandPlanning
     {
+       
+
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         [Required]
@@ -16,9 +18,9 @@ namespace MaicoLand.Models
         [BsonElement]
         public string Title { set; get; }
         [BsonElement]
-        public string Content { set; get; }
+        public string CreatedBy { set; get; }
         [BsonElement]
-        public List<string> HashTags { set; get; }
+        public string Content { set; get; }
         [BsonElement]
         public string ImageUrl { set; get; }
         [BsonElement]
@@ -26,11 +28,15 @@ namespace MaicoLand.Models
         [BsonElement]
         public DateTime CreateDate { set; get; }
         [BsonElement]
-        public string CreatedBy { set; get; }
+        public double LandArea { set; get; }
+        [BsonElement]
+        public string FilePdf { set; get; }
         [BsonElement]
         public DateTime UpdateDate { set; get; }
         [BsonElement]
         public bool IsValid { set; get; }
+        [BsonElement]
+        public DateTime ExpirationDate { set; get; }
         [BsonElement]
         public GeoPoint LeftTop { set; get; }
         [BsonElement]

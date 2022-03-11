@@ -15,7 +15,7 @@ namespace MaicoLand.Repositories
 {
     public class FileRepository : IFileRepository
     {
-         string url  = "https://localhost:5001/api/Image/UpFile";
+        string url = "https://localhost:5001/api/Image/UpFile";
         private AmazonS3Client client;
         public string accessKey;
         public string secretKey;
@@ -27,30 +27,30 @@ namespace MaicoLand.Repositories
         {
             accessKey = settings.AccessKey;
             secretKey = settings.SecretKey;
-             //config = new AmazonS3Config();
+            //config = new AmazonS3Config();
             bucketName = settings.BucketName;
             config = new AmazonS3Config();
-            config.ServiceURL= "https://hn.ss.bfcplatform.vn";
+            config.ServiceURL = "https://hn.ss.bfcplatform.vn";
             config.ForcePathStyle = true;
             client = new AmazonS3Client(
             settings.AccessKey,
             settings.SecretKey,
              config
-           ) ;
+           );
         }
- 
+
 
         public void DeleteFile(String filePath)
         {
             //client.DeleteObject(bucketName, filePath);
         }
-        public  string GetUploadLinkAsync(string path , string contentType) 
+        public string GetUploadLinkAsync(string path, string contentType)
         {
-          
+
             GetPreSignedUrlRequest request_generate_url = new GetPreSignedUrlRequest();
             request_generate_url.ContentType = contentType;
             request_generate_url.BucketName = bucketName;
-            request_generate_url.Key = path     ;
+            request_generate_url.Key = path;
             request_generate_url.Expires = DateTime.Now.AddMinutes(60);
             request_generate_url.Verb = HttpVerb.PUT;
             return client.GetPreSignedURL(request_generate_url);
@@ -61,14 +61,14 @@ namespace MaicoLand.Repositories
         public string GetLinkFile(string path)
         {
             GetPreSignedUrlRequest request_generate_url = new GetPreSignedUrlRequest();
-            request_generate_url.BucketName = bucketName; 
+            request_generate_url.BucketName = bucketName;
             request_generate_url.Key = path;
             request_generate_url.Expires = DateTime.Now.AddMinutes(60);
-            return client.GetPreSignedURL(request_generate_url); 
+            return client.GetPreSignedURL(request_generate_url);
         }
-        
-        
-        
-       
+
+
+
+
     }
 }

@@ -34,8 +34,6 @@ namespace MaicoLand.Models
         [BsonElement]
         public DateTime UpdateDate { set; get; }
         [BsonElement]
-        public bool IsValid { set; get; }
-        [BsonElement]
         public DateTime ExpirationDate { set; get; }
         [BsonElement]
         public GeoPoint LeftTop { set; get; }

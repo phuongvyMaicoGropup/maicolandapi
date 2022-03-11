@@ -50,7 +50,6 @@ namespace MaicoLand.Controllers
                 Content = newLandPlanning.Content,
                 FilePdf = newLandPlanning.FilePdfUrl,
                 LandArea = newLandPlanning.LandArea,
-                IsValid = newLandPlanning.ExpirationDate > DateTime.Now ? true : false,
                 LeftTop = newLandPlanning.LeftTop,
                 LeftBottom = newLandPlanning.LeftBottom,
                 RightBottom = newLandPlanning.RightBottom,

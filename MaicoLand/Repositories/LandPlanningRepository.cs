@@ -25,8 +25,11 @@ namespace MaicoLand.Repositories
 
         }
 
-        public async Task<List<LandPlanning>> GetAsync() =>
-            await _landPlanningCollection.Find(_ => true).ToListAsync();
+        public  PagedList<LandPlanning> Get(PagingParameter pagingParameter)
+        {
+            return PagedList<LandPlanning>.ToPagedList(_landPlanningCollection.AsQueryable<LandPlanning>(), pagingParameter.pageNumber, pagingParameter.pageSize);
+
+        } 
 
         public async Task<LandPlanning> GetAsync(string id) =>
             await _landPlanningCollection.Find(x => x.Id == id).FirstOrDefaultAsync();

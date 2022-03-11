@@ -3,6 +3,7 @@ using MaicoLand.Repositories.InterfaceRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,21 @@ namespace MaicoLand.Controllers
             _landPlanningRepository = landPlanningRepository;
         }
         [HttpGet("read")]
-        public async Task<List<LandPlanning>> Get() =>
-        await _landPlanningRepository.GetAsync();
+        public IActionResult Get([FromQuery] PagingParameter pagingParameter)
+        {
+            var landPlanningList = _landPlanningRepository.Get(pagingParameter);
+            var metaData = new
+            {
+                landPlanningList.TotalCount,
+                landPlanningList.PageSize,
+                landPlanningList.CurrentPage,
+                landPlanningList.HasNext,
+                landPlanningList.HasPrevious
+            };
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metaData));
+            return Ok(landPlanningList);
+            
+        }
 
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<LandPlanning>> Get(string id)
@@ -57,7 +71,7 @@ namespace MaicoLand.Controllers
                
 
     };
-            await _landPlanningRepository.CreateAsync(landInfo);
+            await _landPlanningRepository.CreateAsync(landInfo[FromQuery]PagingParameter pagingParameter);
 
             return CreatedAtAction(nameof(Get), new { id = landInfo.Id }, newLandPlanning);
         }

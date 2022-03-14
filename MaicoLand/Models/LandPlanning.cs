@@ -43,5 +43,9 @@ namespace MaicoLand.Models
         public GeoPoint LeftBottom { set; get; }
         [BsonElement]
         public GeoPoint RightBottom { set; get; }
+
+        [BsonElement]
+        public Address Address { set; get; }
+
     }
 }

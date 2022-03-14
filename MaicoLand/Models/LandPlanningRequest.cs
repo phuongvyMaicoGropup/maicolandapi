@@ -16,5 +16,6 @@ namespace MaicoLand.Models
         public GeoPoint RightTop { set; get; }
         public GeoPoint LeftBottom { set; get; }
         public GeoPoint RightBottom { set; get; }
+        public Address Address { set; get; }
     }
 }

@@ -11,7 +11,7 @@ namespace MaicoLand.Models
         public string ImageUrl { set; get; }
         public double LandArea { set; get; }
         public string FilePdfUrl { set; get; }
-        public DateTime ExpirationDate { set; get; }
+        public String ExpirationDate { set; get; }
         public GeoPoint LeftTop { set; get; }
         public GeoPoint RightTop { set; get; }
         public GeoPoint LeftBottom { set; get; }

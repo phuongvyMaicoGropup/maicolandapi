@@ -59,7 +59,7 @@ namespace MaicoLand.Controllers
                 Title = newLandPlanning.Title,
                 CreateDate = DateTime.Now,
                 UpdateDate = DateTime.Now,
-                ExpirationDate = newLandPlanning.ExpirationDate,
+                ExpirationDate = DateTime.Parse(newLandPlanning.ExpirationDate),
                 CreatedBy= newLandPlanning.CreatedBy,
                 Content = newLandPlanning.Content,
                 FilePdfUrl = newLandPlanning.FilePdfUrl,

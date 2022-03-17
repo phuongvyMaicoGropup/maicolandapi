@@ -23,11 +23,11 @@ namespace MaicoLand.Models
         [BsonElement]
         public string Content { set; get; }
         [BsonElement]
-        public List<string> HashTags { set; get; }
+        public List<string> HashTags { set; get; } = new List<string>(); 
         [BsonElement]
         public string ImageUrl { set; get; }
         [BsonElement]
-        public List<string> Likes { set; get; }
+        public List<string> Likes { set; get; } = new List<string>(); 
         [BsonElement]
         public DateTime CreateDate { set; get; }
         [BsonElement]

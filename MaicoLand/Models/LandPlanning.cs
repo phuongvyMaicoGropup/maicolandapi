@@ -24,7 +24,7 @@ namespace MaicoLand.Models
         [BsonElement]
         public string ImageUrl { set; get; }
         [BsonElement]
-        public List<string> Likes { set; get; }
+        public List<string> Likes { set; get; } =new List<string>();
         [BsonElement]
         public DateTime CreateDate { set; get; }
         [BsonElement]

@@ -68,6 +68,7 @@ namespace MaicoLand.Controllers
                 LeftBottom = newLandPlanning.LeftBottom,
                 RightBottom = newLandPlanning.RightBottom,
                 RightTop = newLandPlanning.RightTop,
+                Address = newLandPlanning.Address,
                
 
     };

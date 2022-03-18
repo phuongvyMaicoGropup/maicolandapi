@@ -43,6 +43,11 @@ namespace MaicoLand.Repositories
         public async Task RemoveAsync(string id) =>
             await _landPlanningCollection.DeleteOneAsync(x => x.Id == id);
 
-        
+        public List<LandPlanning> GetLandByKeyword(String key)
+        {
+
+            return _landPlanningCollection.AsQueryable<LandPlanning>().Where(a =>a.Title.Contains(key)).ToList();
+
+        }
     }
 }

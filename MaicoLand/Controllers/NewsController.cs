@@ -61,7 +61,7 @@ namespace MaicoLand.Controllers
                 ImageUrl = newNews.ImageUrl,
                 CreateDate = DateTime.Now,
                 UpdateDate = DateTime.Now,
-                CreatedBy = newNews.CreateBy
+                CreatedBy = newNews.CreateBy,
             }; 
             await _newsRepository.CreateAsync(newsInfo);
 

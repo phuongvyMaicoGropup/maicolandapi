@@ -52,10 +52,11 @@ namespace MaicoLand.Controllers
         [HttpGet("search")]
         public  ActionResult<List<LandPlanning>> Search(string searchKey, string idAddress1 , string idAddress2)
         {
-            //if (idAddress1!="")
-            List<LandPlanning> items =new List<LandPlanning>();
+            if (idAddress1 is null) idAddress1 = "";
+            if (idAddress2 is null) idAddress2 = "";
 
-                items = _landPlanningRepository.GetLandByKeyword(searchKey,idAddress1,idAddress2);
+
+            List<LandPlanning> items = _landPlanningRepository.GetLandByKeyword(searchKey,idAddress1,idAddress2);
 
           
 

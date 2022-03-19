@@ -16,7 +16,7 @@ namespace MaicoLand.Repositories.InterfaceRepositories
         public Task UpdateAsync(string id, LandPlanning updatedLandPlanning);
 
         public Task RemoveAsync(string id);
-        public List<LandPlanning> GetLandByKeyword(string key);
+        public List<LandPlanning> GetLandByKeyword(string key, string addressId1, string addressId2);
 
        
 

@@ -4,7 +4,9 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MaicoLand.Repositories
@@ -42,11 +44,31 @@ namespace MaicoLand.Repositories
 
         public async Task RemoveAsync(string id) =>
             await _landPlanningCollection.DeleteOneAsync(x => x.Id == id);
+        static string RemoveDiacritics(string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder(capacity: normalizedString.Length);
 
-        public List<LandPlanning> GetLandByKeyword(String key)
+            for (int i = 0; i < normalizedString.Length; i++)
+            {
+                char c = normalizedString[i];
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder
+                .ToString()
+                .Normalize(NormalizationForm.FormC);
+        }
+
+        public List<LandPlanning> GetLandByKeyword(string key , string addressId1,string addressId2)
         {
 
-            return _landPlanningCollection.AsQueryable<LandPlanning>().Where(a =>a.Title.Contains(key)).ToList();
+            return _landPlanningCollection.AsQueryable<LandPlanning>().Where(a =>(a.Title.Contains(key))&& (a.Address.IdLevel1 ==addressId1)&&(a.Address.IdLevel2 == addressId2) ).ToList();
+
 
         }
     }

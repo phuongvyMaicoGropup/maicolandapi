@@ -50,16 +50,14 @@ namespace MaicoLand.Controllers
             return item;
         }
         [HttpGet("search")]
-        public async Task<ActionResult<List<LandPlanning>>> Search(string searchKey, string idAddress1 , string idAddress2)
+        public  ActionResult<List<LandPlanning>> Search(string searchKey, string idAddress1 , string idAddress2)
         {
             //if (idAddress1!="")
             List<LandPlanning> items =new List<LandPlanning>();
 
-            if (searchKey != "")
-            {
                 items = _landPlanningRepository.GetLandByKeyword(searchKey,idAddress1,idAddress2);
 
-            }
+          
 
             
             return items;

@@ -54,6 +54,7 @@ namespace MaicoLand.Controllers
         {
             if (idAddress1 is null) idAddress1 = "";
             if (idAddress2 is null) idAddress2 = "";
+            if (searchKey is null) searchKey = "";
 
 
             List<LandPlanning> items = _landPlanningRepository.GetLandByKeyword(searchKey,idAddress1,idAddress2);

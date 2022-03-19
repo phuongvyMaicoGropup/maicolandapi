@@ -67,7 +67,7 @@ namespace MaicoLand.Repositories
         public List<LandPlanning> GetLandByKeyword(string key , string addressId1,string addressId2)
         {
 
-            return _landPlanningCollection.AsQueryable<LandPlanning>().Where(a =>(a.Title.Contains(key))&& (a.Address.IdLevel1 ==addressId1)&&(a.Address.IdLevel2 == addressId2) ).ToList();
+            return _landPlanningCollection.AsQueryable<LandPlanning>().Where(a =>(a.Title.Contains(key))&& (a.Address.IdLevel1.Contains(addressId1))&&(a.Address.IdLevel2.Contains(addressId2)) ).ToList();
 
 
         }

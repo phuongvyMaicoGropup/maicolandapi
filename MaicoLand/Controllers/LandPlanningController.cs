@@ -57,7 +57,7 @@ namespace MaicoLand.Controllers
 
             if (searchKey != "")
             {
-                items = _landPlanningRepository.GetLandByKeyword(searchKey);
+                items = _landPlanningRepository.GetLandByKeyword(searchKey,idAddress1,idAddress2);
 
             }
 

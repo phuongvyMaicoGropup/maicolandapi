@@ -10,5 +10,7 @@ namespace MaicoLand.Models
         public List<string> HashTags { set; get; }
         public string ImageUrl { set; get; }
         public string CreateBy { set; get; }
+        public NewsType Type { set; get; }
+
     }
 }

@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace MaicoLand.Models
 {
     [CollectionName("News")]
@@ -34,5 +35,7 @@ namespace MaicoLand.Models
         public string CreatedBy { set; get; }
         [BsonElement]
         public DateTime UpdateDate { set; get; }
+        [BsonElement]
+        public NewsType Type { set; get; } 
     }
 }

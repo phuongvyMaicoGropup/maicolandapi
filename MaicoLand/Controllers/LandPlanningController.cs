@@ -30,6 +30,8 @@ namespace MaicoLand.Controllers
             foreach(var item in landPlanningList)
             {
                 item.ImageUrl = _fileRepository.GetLinkFile(item.ImageUrl);
+                item.FilePdfUrl = _fileRepository.GetLinkFile(item.FilePdfUrl);
+
             }
             var metaData = new
             {

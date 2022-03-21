@@ -16,15 +16,24 @@ namespace MaicoLand.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsRepository _newsRepository;
-        public NewsController(INewsRepository newsRepository)
+        private readonly IFileRepository _fileRepository;
+
+        public NewsController(INewsRepository newsRepository, IFileRepository fileRepository)
         {
             _newsRepository = newsRepository;
+            _fileRepository = fileRepository; 
         }
         [HttpGet("read")]
         public IActionResult Get([FromQuery]PagingParameter pagingParameter) {
 
 
             var newsList = _newsRepository.Get(pagingParameter);
+
+            foreach (var item in newsList)
+            {
+                item.ImageUrl = _fileRepository.GetLinkFile(item.ImageUrl);
+            }
+
             var metaData = new
             {
                 newsList.TotalCount,

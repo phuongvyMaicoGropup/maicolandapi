@@ -16,14 +16,21 @@ namespace MaicoLand.Controllers
     public class LandPlanningController : ControllerBase
     {
         private readonly ILandPlanningRepository _landPlanningRepository;
-        public LandPlanningController(ILandPlanningRepository landPlanningRepository)
+        private readonly IFileRepository _fileRepository;
+
+        public LandPlanningController(ILandPlanningRepository landPlanningRepository, IFileRepository fileRepository)
         {
             _landPlanningRepository = landPlanningRepository;
+            _fileRepository = fileRepository; 
         }
         [HttpGet("read")]
         public IActionResult Get([FromQuery] PagingParameter pagingParameter)
         {
             var landPlanningList = _landPlanningRepository.Get(pagingParameter);
+            foreach(var item in landPlanningList)
+            {
+                item.ImageUrl = _fileRepository.GetLinkFile(item.ImageUrl);
+            }
             var metaData = new
             {
                 landPlanningList.TotalCount,

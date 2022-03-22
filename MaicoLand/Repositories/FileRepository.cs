@@ -58,8 +58,25 @@ namespace MaicoLand.Repositories
 
 
         }
-        public string GetLinkFile(string path)
+        public async Task<string> GetLinkFileAsync(string path)
         {
+            PutCORSConfigurationRequest request_put_cors = new PutCORSConfigurationRequest();
+            request_put_cors.BucketName = bucketName;
+            CORSRule cors_rule = new CORSRule();
+            cors_rule.AllowedHeaders = new List<string> { "*" };
+            cors_rule.AllowedMethods = new List<string> { "GET" };
+            cors_rule.AllowedOrigins = new List<string> { "*" };
+            cors_rule.MaxAgeSeconds = 600;
+
+            CORSConfiguration cors_config = new CORSConfiguration();
+            cors_config.Rules = new List<CORSRule> { cors_rule };
+
+            request_put_cors.Configuration = cors_config;
+
+            PutCORSConfigurationResponse response_put_cors = new PutCORSConfigurationResponse();
+            response_put_cors = await client.PutCORSConfigurationAsync(request_put_cors);
+            Console.WriteLine("Put bucket CORS status " + response_put_cors.HttpStatusCode);
+
             GetPreSignedUrlRequest request_generate_url = new GetPreSignedUrlRequest();
             request_generate_url.BucketName = bucketName;
             request_generate_url.Key = path;

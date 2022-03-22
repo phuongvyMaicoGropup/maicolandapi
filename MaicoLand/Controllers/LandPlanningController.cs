@@ -24,13 +24,13 @@ namespace MaicoLand.Controllers
             _fileRepository = fileRepository; 
         }
         [HttpGet("read")]
-        public IActionResult Get([FromQuery] PagingParameter pagingParameter)
+        public async Task<IActionResult> Get([FromQuery] PagingParameter pagingParameter)
         {
             var landPlanningList = _landPlanningRepository.Get(pagingParameter);
             foreach(var item in landPlanningList)
             {
-                item.ImageUrl = _fileRepository.GetLinkFile(item.ImageUrl);
-                item.FilePdfUrl = _fileRepository.GetLinkFile(item.FilePdfUrl);
+                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+                item.FilePdfUrl = await _fileRepository.GetLinkFileAsync(item.FilePdfUrl);
 
             }
             var metaData = new

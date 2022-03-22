@@ -24,14 +24,14 @@ namespace MaicoLand.Controllers
             _fileRepository = fileRepository; 
         }
         [HttpGet("read")]
-        public IActionResult Get([FromQuery]PagingParameter pagingParameter) {
+        public async Task<IActionResult> Get([FromQuery]PagingParameter pagingParameter) {
 
 
             var newsList = _newsRepository.Get(pagingParameter);
 
             foreach (var item in newsList)
             {
-                item.ImageUrl = _fileRepository.GetLinkFile(item.ImageUrl);
+                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
             }
 
             var metaData = new

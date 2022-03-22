@@ -35,9 +35,9 @@ namespace MaicoLand.Controllers
         }
 
         [HttpGet("getlink")]
-        public string GetLinkFromServer(string path)
+        public async Task<string> GetLinkFromServer(string path) 
         {
-            return _fileRepository.GetLinkFile(path);
+            return await _fileRepository.GetLinkFileAsync(path);
         }
 
         

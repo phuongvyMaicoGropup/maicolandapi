@@ -61,13 +61,7 @@ namespace MaicoLand.Controllers
         [HttpGet("search")]
         public ActionResult<List<News>> Search(string searchKey)
         {
-
-
             List<News> items = _newsRepository.GetNewsByKeyword(searchKey);
-
-
-
-
             return items;
         }
 

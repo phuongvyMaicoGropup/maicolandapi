@@ -66,7 +66,7 @@ namespace MaicoLand.Repositories
             cors_rule.AllowedHeaders = new List<string> { "*" };
             cors_rule.AllowedMethods = new List<string> { "GET" };
             cors_rule.AllowedOrigins = new List<string> { "*" };
-            cors_rule.MaxAgeSeconds = 600;
+            cors_rule.MaxAgeSeconds = 6000;
 
             CORSConfiguration cors_config = new CORSConfiguration();
             cors_config.Rules = new List<CORSRule> { cors_rule };

@@ -126,7 +126,11 @@ namespace MaicoLand.Controllers
             {
                 return NotFound();
             }
-            land.Likes.Add(userId);
+            if (!land.Likes.Any(userId.Contains))
+            {
+                land.Likes.Add(userId);
+            }
+                
 
             await _landPlanningRepository.UpdateAsync(landId, land);
 

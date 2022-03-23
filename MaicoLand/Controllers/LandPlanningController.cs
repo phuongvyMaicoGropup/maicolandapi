@@ -117,7 +117,7 @@ namespace MaicoLand.Controllers
 
             return NoContent();
         }
-        [HttpPut("{id:length(24)}/like")]
+        [HttpPut("{landId:length(24)}/like")]
         public async Task<IActionResult> LikePost(string landId, string userId)
         {
             var land = await _landPlanningRepository.GetAsync(landId);

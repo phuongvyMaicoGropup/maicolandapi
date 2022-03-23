@@ -104,16 +104,31 @@ namespace MaicoLand.Controllers
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, LandPlanning updatedLandPlanning)
         {
-            var news = await _landPlanningRepository.GetAsync(id);
+            var land = await _landPlanningRepository.GetAsync(id);
 
-            if (news is null)
+            if (land is null)
             {
                 return NotFound();
             }
 
-            updatedLandPlanning.Id = news.Id;
+            updatedLandPlanning.Id = land.Id;
 
             await _landPlanningRepository.UpdateAsync(id, updatedLandPlanning);
+
+            return NoContent();
+        }
+        [HttpPut("{id:length(24)}/like")]
+        public async Task<IActionResult> LikePost(string landId, string userId)
+        {
+            var land = await _landPlanningRepository.GetAsync(landId);
+
+            if (land is null)
+            {
+                return NotFound();
+            }
+            land.Likes.Add(userId);
+
+            await _landPlanningRepository.UpdateAsync(landId, land);
 
             return NoContent();
         }

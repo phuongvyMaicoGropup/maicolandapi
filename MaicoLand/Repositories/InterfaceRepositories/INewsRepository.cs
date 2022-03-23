@@ -14,7 +14,7 @@ namespace MaicoLand.Repositories.InterfaceRepositories
         public Task CreateAsync(News newNews);
 
         public Task UpdateAsync(string id, News updatedNews);
-
+        public List<News> GetNewsByKeyword(string key); 
         public Task RemoveAsync(string id);
     }
 }

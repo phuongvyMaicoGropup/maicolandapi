@@ -39,6 +39,13 @@ namespace MaicoLand.Repositories
  
         public async Task RemoveAsync(string id) =>
             await _newsCollection.DeleteOneAsync(x => x.Id == id);
-       
+        public List<News> GetNewsByKeyword(string key)
+        {
+
+            return _newsCollection.AsQueryable<News>().Where(a => (a.Title.Contains(key))).ToList(); 
+
+
+        }
+
     }
 }

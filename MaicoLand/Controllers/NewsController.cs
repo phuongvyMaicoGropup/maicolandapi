@@ -59,10 +59,16 @@ namespace MaicoLand.Controllers
             return news;
         }
         [HttpGet("search")]
-        public ActionResult<List<News>> Search(string searchKey)
+        public async Task<List<News>> Search(string searchKey)
         {
-            List<News> items = _newsRepository.GetNewsByKeyword(searchKey);
-            return items;
+            List<News> newsList = _newsRepository.GetNewsByKeyword(searchKey);
+            foreach (var item in newsList)
+            {
+                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+            }
+
+
+            return newsList;
         }
 
         [HttpPost("create")]

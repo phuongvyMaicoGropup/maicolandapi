@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace MaicoLand.Models
 {
     public class User
@@ -25,6 +26,11 @@ namespace MaicoLand.Models
         public string PhotoURL { set; get; }
         [BsonElement]
         public string PhoneNumber { set; get; }
+        //[BsonElement]
+        //public DateTime BirthDay { set; get; }
+        //[BsonElement]
+        //public Sex Sex { set; get; }
+
 
     }
 }

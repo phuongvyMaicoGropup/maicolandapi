@@ -84,6 +84,7 @@ namespace MaicoLand.Controllers
                 CreateDate = DateTime.Now,
                 UpdateDate = DateTime.Now,
                 CreatedBy = newNews.CreateBy,
+                Type = newNews.Type,
             }; 
             await _newsRepository.CreateAsync(newsInfo);
 

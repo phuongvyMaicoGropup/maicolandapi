@@ -59,19 +59,24 @@ namespace MaicoLand.Controllers
             return item;
         }
         [HttpGet("search")]
-        public  ActionResult<List<LandPlanning>> Search(string searchKey, string idAddress1 , string idAddress2)
+        public async Task<List<LandPlanning>> Search(string searchKey, string idAddress1 , string idAddress2)
         {
             if (idAddress1 is null) idAddress1 = "";
             if (idAddress2 is null) idAddress2 = "";
             if (searchKey is null) searchKey = "";
 
 
-            List<LandPlanning> items = _landPlanningRepository.GetLandByKeyword(searchKey,idAddress1,idAddress2);
+            List<LandPlanning> landPlanningList = _landPlanningRepository.GetLandByKeyword(searchKey,idAddress1,idAddress2);
+            foreach (var item in landPlanningList)
+            {
+                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+                item.FilePdfUrl = await _fileRepository.GetLinkFileAsync(item.FilePdfUrl);
 
-          
+            }
 
-            
-            return items;
+
+
+            return landPlanningList;
         }
 
         [HttpPost("create")]

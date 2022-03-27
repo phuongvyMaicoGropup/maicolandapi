@@ -28,7 +28,7 @@ namespace MaicoLand.Models
         {
             var count = source.Count();
             var items = source
-                .Skip((pageNumber - 1) * pageSize).OrderBy(a=> a.CreateDate)
+                .Skip((pageNumber - 1) * pageSize).OrderByDescending(a=> a.CreateDate)
                            
                          .Take(pageSize)
                          .ToList();
@@ -38,7 +38,7 @@ namespace MaicoLand.Models
         {
             var count = source.Count();
             var items = source
-                .Skip((pageNumber - 1) * pageSize).OrderBy(a => a.CreateDate)
+                .Skip((pageNumber - 1) * pageSize).OrderByDescending(a => a.CreateDate)
 
                          .Take(pageSize)
                          .ToList();

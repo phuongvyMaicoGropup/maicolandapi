@@ -84,7 +84,7 @@ namespace MaicoLand.Repositories
                     LastName = request.LastName,
                     UserName = request.UserName,
                     PhotoURL = "",
-                    PhoneNumber="",
+                    PhoneNumber=request.PhoneNumber,
 
                 };
                 await _userCollection.InsertOneAsync(newUser);

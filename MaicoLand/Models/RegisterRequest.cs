@@ -20,9 +20,11 @@ namespace MaicoLand.Models
         [Required]
         public string Password { set; get; }
         [Required]
-        public string Sex { set; get; }
-        [Required]
-        public DateTime BirthDay { set; get; }
+        public string PhoneNumber { set; get; }
+        //[Required]
+        //public string Sex { set; get; }
+        //[Required]
+        //public DateTime BirthDay { set; get; }
         [Required]
         public bool RememberMe { set; get; }
     }

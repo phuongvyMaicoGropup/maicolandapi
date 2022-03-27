@@ -24,7 +24,7 @@ namespace MaicoLand.Repositories
 
         public  PagedList<News> Get(PagingParameter pagingParameter)
         {
-            return PagedList<News>.ToPagedList(_newsCollection.AsQueryable<News>(), pagingParameter.pageNumber, pagingParameter.pageSize);
+            return PagedList<News>.ToNewsPagedList(_newsCollection.AsQueryable<News>(), pagingParameter.pageNumber, pagingParameter.pageSize);
         }
 
         public async Task<News> GetAsync(string id) =>

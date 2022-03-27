@@ -29,7 +29,7 @@ namespace MaicoLand.Repositories
 
         public  PagedList<LandPlanning> Get(PagingParameter pagingParameter)
         {
-            return PagedList<LandPlanning>.ToPagedList(_landPlanningCollection.AsQueryable<LandPlanning>(), pagingParameter.pageNumber, pagingParameter.pageSize);
+            return PagedList<LandPlanning>.ToLandPagedList(_landPlanningCollection.AsQueryable<LandPlanning>(), pagingParameter.pageNumber, pagingParameter.pageSize);
 
         } 
 

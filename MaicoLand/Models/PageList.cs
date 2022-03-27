@@ -24,13 +24,25 @@ namespace MaicoLand.Models
             AddRange(items);
         }
 
-        public static PagedList<T> ToPagedList(IQueryable<T> source , int pageNumber, int pageSize)
+        public static PagedList<News> ToNewsPagedList(IQueryable<News> source , int pageNumber, int pageSize)
         {
             var count = source.Count();
-            var items = source.Skip((pageNumber - 1) * pageSize)
+            var items = source
+                .Skip((pageNumber - 1) * pageSize).OrderBy(a=> a.CreateDate)
+                           
                          .Take(pageSize)
                          .ToList();
-            return new PagedList<T>(items, count, pageNumber, pageSize);
+            return new PagedList<News>(items, count, pageNumber, pageSize);
+        }
+        public static PagedList<LandPlanning> ToLandPagedList(IQueryable<LandPlanning> source, int pageNumber, int pageSize)
+        {
+            var count = source.Count();
+            var items = source
+                .Skip((pageNumber - 1) * pageSize).OrderBy(a => a.CreateDate)
+
+                         .Take(pageSize)
+                         .ToList();
+            return new PagedList<LandPlanning>(items, count, pageNumber, pageSize);
         }
 
     }

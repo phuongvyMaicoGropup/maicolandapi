@@ -50,6 +50,8 @@ namespace MaicoLand.Controllers
         public async Task<ActionResult<LandPlanning>> Get(string id)
         {
             var item = await _landPlanningRepository.GetAsync(id);
+            item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+            item.FilePdfUrl = await _fileRepository.GetLinkFileAsync(item.FilePdfUrl);
 
             if (item is null)
             {

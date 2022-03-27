@@ -50,6 +50,7 @@ namespace MaicoLand.Controllers
         public async Task<ActionResult<News>> Get(string id)
         {
             var news = await _newsRepository.GetAsync(id);
+            news.ImageUrl = await _fileRepository.GetLinkFileAsync(news.ImageUrl);
 
             if (news is null)
             {

@@ -15,5 +15,6 @@ namespace MaicoLand.Repositories.InterfaceRepositories
         public void DeleteFile(string filePath);
         public string GetUploadLinkAsync(string path, string contentType);
         public  Task<string> GetLinkFileAsync(string path);
+        public Task<string> DownloadFile(string path);
     }
 }

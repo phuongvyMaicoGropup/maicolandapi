@@ -84,8 +84,9 @@ namespace MaicoLand.Repositories
             return client.GetPreSignedURL(request_generate_url);
         }
 
-
-
-
+        public Task<string> DownloadFile(string path)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

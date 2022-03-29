@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MaicoLand.Controllers
@@ -64,12 +65,56 @@ namespace MaicoLand.Controllers
 
             return item;
         }
+        [HttpGet("checkphoneaccount")]
+        public async Task<String> CheckPhoneAccount(string phone)
+        {
+            string item = await _userRepository.CheckPhone(phone);
+            StringBuilder sb = new StringBuilder(item);
+            
+
+            if (item.Length <=5)
+            {
+                for (int i = 1; i < item.Length - 1; i++)
+                {
+                    sb[i] = '*';
+                }
+                sb[item.Length-1]= item[item.Length-1];
+            }
+            else
+            {
+                for (int i = 1; i < item.Length - 2; i++)
+                {
+                    sb[i] = '*';
+                }
+                sb[item.Length - 1] = item[item.Length - 1];
+                sb[item.Length - 2] = item[item.Length - 2];
+
+            }
+
+            return sb.ToString();
+        }
+
+        [HttpPost("forgetpassword")]
+        [AllowAnonymous]
+        public async Task<bool> ChangePassword(string password, string phone)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _userRepository.ChangePassword(password, phone);
+                if (!result)
+                {
+                    return false; 
+                }
+                return true; 
+            }
+            return false; 
+        }
         //[AllowAnonymous]
         //public async Task<IActionResult> Logout()
         //{
         //    await _userRepository.Logout();
         //    return Ok(); 
-                
+
         //}
     }
 }

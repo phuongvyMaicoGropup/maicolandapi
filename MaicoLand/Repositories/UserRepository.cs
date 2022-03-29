@@ -100,6 +100,7 @@ namespace MaicoLand.Repositories
             => await _userCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
         public async Task<User> GetByEmailAsync(string email)
             => await _userCollection.Find(x => x.Email == email).FirstOrDefaultAsync();
+        
 
         public async Task RemoveAsync(string id)
         => await _userCollection.DeleteOneAsync(x => x.Id == id);
@@ -110,6 +111,41 @@ namespace MaicoLand.Repositories
         public async Task Logout()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<string> CheckPhone(string phone)
+        {
+            string name = "";
+            User user = await _userCollection.Find(x => x.PhoneNumber == phone).FirstOrDefaultAsync();
+            Console.WriteLine(user);
+            if (user != null)
+            {
+                name = user.UserName;
+            }
+            return name;
+
+        }
+
+        public async Task<bool> ChangePassword(string password, string phone)
+        {
+            try
+            {
+                String name = (await _userCollection.Find(x => x.PhoneNumber == phone).FirstOrDefaultAsync()).UserName;
+                AppUser user = await _userManager.FindByNameAsync(name);
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+                var result = await _userManager.ResetPasswordAsync(user, token, password);
+                if (result == IdentityResult.Success)
+                {
+                    return true;
+                }
+                else return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+          
         }
     }
 }

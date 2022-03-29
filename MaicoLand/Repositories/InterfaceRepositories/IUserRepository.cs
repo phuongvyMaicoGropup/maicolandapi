@@ -18,6 +18,8 @@ namespace MaicoLand.Repositories.InterfaceRepositories
         public Task UpdateAsync(string id, User updatedUser);
 
         public Task RemoveAsync(string id);
+        public Task<bool> ChangePassword(string password, string phone);
+        public  Task<string> CheckPhone(string phone);
         public Task<string> Authenticate(LoginRequest request);
 
     }

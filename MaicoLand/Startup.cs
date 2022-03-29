@@ -39,7 +39,8 @@ namespace MaicoLand
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
-
+            //services.AddIdentity<User, IdentityRole>()
+            //.AddDefaultTokenProviders();
 
             services.Configure<MaicoLandDatabaseSettings>(Configuration.GetSection(nameof(MaicoLandDatabaseSettings)));
 
@@ -53,7 +54,7 @@ namespace MaicoLand
         (
 
         mongoDbSettings.ConnectionString, mongoDbSettings.DatabaseName
-        );
+        ).AddDefaultTokenProviders();
 
 
 

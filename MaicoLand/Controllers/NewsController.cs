@@ -122,5 +122,10 @@ namespace MaicoLand.Controllers
 
             return NoContent();
         }
+        [HttpGet("author/{id:length(24)}")]
+        public List<News> SearchNewsByAuthorId(string id)=> _newsRepository.GetNewsByAuthorId(id);
+
+
+        
     }
 }

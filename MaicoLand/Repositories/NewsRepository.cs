@@ -46,6 +46,8 @@ namespace MaicoLand.Repositories
 
 
         }
+        public List<News> GetNewsByAuthorId(string id)=> _newsCollection.AsQueryable<News>().Where(a => a.CreatedBy == id).ToList();
+        
 
     }
 }

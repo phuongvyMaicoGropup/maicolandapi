@@ -74,5 +74,9 @@ namespace MaicoLand.Repositories
 
         }
 
+        public List<LandPlanning> GetLandByAuthorId(string id)
+        {
+            return _landPlanningCollection.AsQueryable<LandPlanning>().Where(a => a.CreatedBy == id).ToList(); 
+        }
     }
 }

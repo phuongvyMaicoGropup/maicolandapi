@@ -52,7 +52,6 @@ namespace MaicoLand
             services.AddIdentity<AppUser, AppRole>()
         .AddMongoDbStores<AppUser, AppRole, Guid>
         (
-
         mongoDbSettings.ConnectionString, mongoDbSettings.DatabaseName
         ).AddDefaultTokenProviders();
 

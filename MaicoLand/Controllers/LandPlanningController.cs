@@ -81,14 +81,20 @@ namespace MaicoLand.Controllers
             return landPlanningList;
         }
         [HttpGet("author/{id:length(24)}")]
-        public  List<LandPlanning> SearchLandByAuthorId(string id)
+        public async Task<List<LandPlanning>> SearchLandByAuthorId(string id)
         {
 
             //List<LandPlanning> landPlanningList = _landPlanningRepository.GetLandByKeyword(searchKey, idAddress1, idAddress2);
 
 
             List<LandPlanning> landPlanningList = _landPlanningRepository.GetLandByAuthorId(id);
-           
+
+            foreach (var item in landPlanningList)
+            {
+                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+                item.FilePdfUrl = await _fileRepository.GetLinkFileAsync(item.FilePdfUrl);
+
+            }
 
             return landPlanningList;
         }

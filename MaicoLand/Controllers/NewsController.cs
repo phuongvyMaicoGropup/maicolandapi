@@ -123,8 +123,15 @@ namespace MaicoLand.Controllers
             return NoContent();
         }
         [HttpGet("author/{id:length(24)}")]
-        public List<News> SearchNewsByAuthorId(string id)=> _newsRepository.GetNewsByAuthorId(id);
-
+        public async Task<List<News>> SearchNewsByAuthorId(string id)
+        {
+            var newsList = _newsRepository.GetNewsByAuthorId(id);
+            foreach (var item in newsList)
+            {
+                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+            }
+            return newsList;
+        }
 
         
     }

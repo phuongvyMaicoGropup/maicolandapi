@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.Identity.MongoDbCore" Version="3.1.2" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="12.7.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.16.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
@@ -23,5 +24,9 @@
     <None Remove="AWSSDK.S3" />
     <None Remove="AWSSDK.Core" />
     <None Remove="AWSSDK.Extensions.NETCore.Setup" />
+    <None Remove="Query\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Query\" />
   </ItemGroup>
 </Project>

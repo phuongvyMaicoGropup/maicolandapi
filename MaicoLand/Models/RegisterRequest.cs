@@ -9,23 +9,13 @@ namespace MaicoLand.Models
     public class RegisterRequest
     {
         [Required]
-        public string FirstName { set; get; }
-        [Required]
-        public string LastName { set; get; }
+        public string FullName { set; get; }
         [Required]
         public string UserName { set; get; }
         [Required]
-        [EmailAddress(ErrorMessage = "Invalid Email")]
-        public string Email { set; get; }
-        [Required]
         public string Password { set; get; }
         [Required]
-        public string PhoneNumber { set; get; }
-        //[Required]
-        //public string Sex { set; get; }
-        //[Required]
-        //public DateTime BirthDay { set; get; }
-        [Required]
-        public bool RememberMe { set; get; }
+        public string Email { set; get; }
+
     }
 }

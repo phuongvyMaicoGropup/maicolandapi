@@ -29,10 +29,10 @@ namespace MaicoLand.Controllers
 
             var newsList = _newsRepository.Get(pagingParameter);
 
-            foreach (var item in newsList)
-            {
-                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
-            }
+            //foreach (var item in newsList)
+            //{
+            //    item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+            //}
 
             var metaData = new
             {
@@ -50,7 +50,7 @@ namespace MaicoLand.Controllers
         public async Task<ActionResult<News>> Get(string id)
         {
             var news = await _newsRepository.GetAsync(id);
-            news.ImageUrl = await _fileRepository.GetLinkFileAsync(news.ImageUrl);
+             //news.Images.ForEach(async i => i = await _fileRepository.GetLinkFileAsync(i)) ;
 
             if (news is null)
             {
@@ -63,10 +63,11 @@ namespace MaicoLand.Controllers
         public async Task<List<News>> Search(string searchKey)
         {
             List<News> newsList = _newsRepository.GetNewsByKeyword(searchKey);
-            foreach (var item in newsList)
-            {
-                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
-            }
+            //foreach (var item in newsList)
+            //{
+            //    item.Images.ForEach(async i => i = await _fileRepository.GetLinkFileAsync(i));
+
+            //}
 
 
             return newsList;
@@ -80,10 +81,10 @@ namespace MaicoLand.Controllers
                 Title = newNews.Title,
                 Content = newNews.Content,
                 HashTags = newNews.HashTags,
-                ImageUrl = newNews.ImageUrl,
-                CreateDate = DateTime.Now,
-                UpdateDate = DateTime.Now,
-                CreatedBy = newNews.CreateBy,
+                Images = newNews.Images,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
+                CreatedBy = newNews.CreatedBy,
                 Type = newNews.Type,
             }; 
             await _newsRepository.CreateAsync(newsInfo);
@@ -126,10 +127,10 @@ namespace MaicoLand.Controllers
         public async Task<List<News>> SearchNewsByAuthorId(string id)
         {
             var newsList = _newsRepository.GetNewsByAuthorId(id);
-            foreach (var item in newsList)
-            {
-                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
-            }
+            //foreach (var item in newsList)
+            //{
+            //    item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+            //}
             return newsList;
         }
 

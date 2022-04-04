@@ -40,16 +40,18 @@ namespace MaicoLand.Repositories
             var user =await _userManager.FindByNameAsync(request.UserName);
             
             if (user == null) return null; 
-            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe,true);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, request.RememberMe);
             if (!result.Succeeded) return null;
             var userInfo = await GetByEmailAsync(user.Email);
             var claims = new[]
             {
                 new Claim("id", userInfo.Id),
                 new Claim("email", userInfo.Email),
-                new Claim("username", userInfo.UserName),
-                new Claim("firstName", userInfo.FirstName),
-                new Claim("lastName", userInfo.LastName),
+                new Claim("fullName", userInfo.FullName),
+                new Claim("userName", userInfo.UserName),
+                new Claim("birthDate", userInfo.BirthDate.ToString()),
+                new Claim("address", userInfo.Address),
+                new Claim("bio", userInfo.Bio),
                 new Claim("phoneNumber", userInfo.PhoneNumber),
                 new Claim("photoURL", userInfo.PhotoURL),
             };
@@ -59,7 +61,7 @@ namespace MaicoLand.Repositories
             var token = new JwtSecurityToken(_config["Tokens:Issuer"],
                 _config["Tokens:Issuer"],
                 claims,
-                expires: DateTime.Now.AddHours(3),
+                expires: DateTime.Now.AddDays(7),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
@@ -75,16 +77,15 @@ namespace MaicoLand.Repositories
             };
 
             IdentityResult result = await _userManager.CreateAsync(appUser, request.Password);
-            if (result.Succeeded)
+            User user = await _userCollection.Find(x => x.UserName == request.UserName).FirstOrDefaultAsync();
+            if (user == null)
             {
                 User newUser = new User
                 {
-                    Email = request.Email,
-                    FirstName = request.FirstName,
-                    LastName = request.LastName,
+                    FullName = request.FullName,
                     UserName = request.UserName,
-                    PhotoURL = "",
-                    PhoneNumber=request.PhoneNumber,
+                    //PhotoURL = "",
+                    Email=request.Email,
 
                 };
                 await _userCollection.InsertOneAsync(newUser);

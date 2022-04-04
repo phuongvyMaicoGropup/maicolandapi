@@ -25,18 +25,18 @@ namespace MaicoLand.Controllers
 
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        public async Task<bool> Register([FromBody] RegisterRequest request)
         {
             if (ModelState.IsValid)
             {
                 var result = await _userRepository.Register(request);
                 if (!result)
                 {
-                    return BadRequest("Register is unsuccessful");
+                    return false; 
                 }
-                return Ok(); 
+                return true; 
             }
-            return BadRequest(ModelState); 
+            return true; 
         }
         [HttpPost("authenticate")]
         [AllowAnonymous]

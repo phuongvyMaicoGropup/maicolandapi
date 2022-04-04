@@ -15,7 +15,6 @@ namespace MaicoLand.Models
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         [Required]
-
         public string Id { set; get; }
         [BsonElement]
         [Required]
@@ -26,16 +25,24 @@ namespace MaicoLand.Models
         [BsonElement]
         public List<string> HashTags { set; get; } = new List<string>(); 
         [BsonElement]
-        public string ImageUrl { set; get; }
+        public List<string> Images { set; get; }=new List<string>();
         [BsonElement]
         public List<string> Likes { set; get; } = new List<string>(); 
         [BsonElement]
-        public DateTime CreateDate { set; get; }
+        public DateTime CreatedDate { set; get; }
         [BsonElement]
         public string CreatedBy { set; get; }
         [BsonElement]
-        public DateTime UpdateDate { set; get; }
+        public DateTime UpdatedDate { set; get; }
         [BsonElement]
-        public NewsType Type { set; get; } 
+        public NewsType Type { set; get; }
+        [BsonElement]
+        public int Views { set; get; }
+        [BsonElement]
+        public int Saved { set; get; }
+        [BsonElement]
+        public bool IsPrivate { set; get; }
+
+
     }
 }

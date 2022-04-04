@@ -7,10 +7,11 @@ namespace MaicoLand.Models
     {
         public string Title { set; get; }
         public string Content { set; get; }
-        public List<string> HashTags { set; get; }
-        public string ImageUrl { set; get; }
-        public string CreateBy { set; get; }
+        public List<string> HashTags { set; get; }= new List<string>();
+        public List<string> Images { set; get; }= new List<string>();
+        public string CreatedBy { set; get; }
         public NewsType Type { set; get; }
+        public bool IsPrivate { set; get; }
 
     }
 }

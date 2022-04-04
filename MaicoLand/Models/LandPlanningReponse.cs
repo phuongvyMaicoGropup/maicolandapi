@@ -11,13 +11,16 @@ namespace MaicoLand.Models
         public string CreatedBy { set; get; }
         public string Content { set; get; }
         public string ImageUrl { set; get; }
-        public double LandArea { set; get; }
-        public string FilePdfUrl { set; get; }
+        public double Area { set; get; }
+        public string DetailInfo { set; get; }
         public String ExpirationDate { set; get; }
         public GeoPoint LeftTop { set; get; }
         public GeoPoint RightTop { set; get; }
         public GeoPoint LeftBottom { set; get; }
         public GeoPoint RightBottom { set; get; }
         public Address Address { set; get; }
+        public int Views { set; get; }
+        public int Saved { set; get; }
+        public bool IsPrivate { set; get; }
     }
 }

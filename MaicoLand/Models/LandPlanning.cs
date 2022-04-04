@@ -26,13 +26,13 @@ namespace MaicoLand.Models
         [BsonElement]
         public List<string> Likes { set; get; } =new List<string>();
         [BsonElement]
-        public DateTime CreateDate { set; get; }
+        public DateTime CreatedDate { set; get; }
         [BsonElement]
-        public double LandArea { set; get; }
+        public double Area { set; get; }
         [BsonElement]
-        public string FilePdfUrl { set; get; }
+        public string DetailInfo { set; get; } = "";
         [BsonElement]
-        public DateTime UpdateDate { set; get; }
+        public DateTime UpdatedDate { set; get; }
         [BsonElement]
         public DateTime ExpirationDate { set; get; }
         [BsonElement]
@@ -43,9 +43,15 @@ namespace MaicoLand.Models
         public GeoPoint LeftBottom { set; get; }
         [BsonElement]
         public GeoPoint RightBottom { set; get; }
-
         [BsonElement]
         public Address Address { set; get; }
+        [BsonElement]
+        public int Views { set; get; }
+        [BsonElement]
+        public int Saved { set; get; }
+        [BsonElement]
+        public bool IsPrivate { set; get; }
+
 
     }
 }

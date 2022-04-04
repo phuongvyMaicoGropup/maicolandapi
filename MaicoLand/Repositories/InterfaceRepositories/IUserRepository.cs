@@ -21,6 +21,7 @@ namespace MaicoLand.Repositories.InterfaceRepositories
         public Task<bool> ChangePassword(string password, string phone);
         public  Task<string> CheckPhone(string phone);
         public Task<string> Authenticate(LoginRequest request);
+        public Task<bool> CheckEmailAccount(String email);
 
     }
 }

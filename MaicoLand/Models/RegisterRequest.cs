@@ -15,7 +15,8 @@ namespace MaicoLand.Models
         [Required]
         public string Password { set; get; }
         [Required]
-        public string Email { set; get; }
-
+        public string PhoneNumber { set; get; }
+        [Required]
+        public string Email { set; get; } 
     }
 }

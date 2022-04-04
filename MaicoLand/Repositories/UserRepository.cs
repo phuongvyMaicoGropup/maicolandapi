@@ -1,17 +1,26 @@
-﻿    using MaicoLand.Models;
-using MaicoLand.Repositories.InterfaceRepositories;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Security.Claims;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
+
+using System.Threading.Tasks;
+using MaicoLand.Repositories.InterfaceRepositories;
+using MongoDB.Driver;
+using MaicoLand.Models;
+using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace MaicoLand.Repositories
 {
@@ -20,12 +29,23 @@ namespace MaicoLand.Repositories
         private readonly IMongoCollection<User> _userCollection;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly IConfiguration _config; 
+        private readonly IConfiguration _config;
+        private ISendMailService _sendMailService;
+        public async Task<bool> CheckEmailAccount(String email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                return true; 
+            }
+            return false; 
+        }
 
         public UserRepository(
             IMaicoLandDatabaseSettings settings, UserManager<AppUser> userManager, 
-            SignInManager<AppUser> signInManager, IConfiguration config)
+            SignInManager<AppUser> signInManager, IConfiguration config , ISendMailService sendMailService)
         {
+            _sendMailService = sendMailService; 
             _userManager = userManager;
             _signInManager = signInManager;
             _config = config;
@@ -39,12 +59,15 @@ namespace MaicoLand.Repositories
         {
             var user =await _userManager.FindByNameAsync(request.UserName);
             
-            if (user == null) return null; 
-            var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, request.RememberMe);
-            if (!result.Succeeded) return null;
-            var userInfo = await GetByEmailAsync(user.Email);
-            var claims = new[]
+            if (user == null) return null;
+            if (user.EmailConfirmed)
             {
+                var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, request.RememberMe);
+
+                if (!result.Succeeded) return null;
+                var userInfo = await GetByEmailAsync(user.Email);
+                var claims = new[]
+                {
                 new Claim("id", userInfo.Id),
                 new Claim("email", userInfo.Email),
                 new Claim("fullName", userInfo.FullName),
@@ -55,40 +78,61 @@ namespace MaicoLand.Repositories
                 new Claim("phoneNumber", userInfo.PhoneNumber),
                 new Claim("photoURL", userInfo.PhotoURL),
             };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(_config["Tokens:Issuer"],
-                _config["Tokens:Issuer"],
-                claims,
-                expires: DateTime.Now.AddDays(7),
-                signingCredentials: creds);
+                var token = new JwtSecurityToken(_config["Tokens:Issuer"],
+                    _config["Tokens:Issuer"],
+                    claims,
+                    expires: DateTime.Now.AddDays(7),
+                    signingCredentials: creds);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
+            return null; 
+            
 
         }
 
+
         public async Task<bool> Register(RegisterRequest request)
         {
-            AppUser appUser = new AppUser
-            {
-                UserName = request.UserName,
-                Email = request.Email
-            };
-
-            IdentityResult result = await _userManager.CreateAsync(appUser, request.Password);
             User user = await _userCollection.Find(x => x.UserName == request.UserName).FirstOrDefaultAsync();
+            
             if (user == null)
             {
+                AppUser newAppUser = new AppUser
+                {
+                    UserName = request.UserName,
+                    Email = request.Email,
+                };
+
+                IdentityResult result = await _userManager.CreateAsync(newAppUser, request.Password);
+                AppUser appUser = await _userManager.FindByNameAsync(request.UserName);
                 User newUser = new User
                 {
                     FullName = request.FullName,
                     UserName = request.UserName,
                     //PhotoURL = "",
+                    PhoneNumber = request.PhoneNumber,
                     Email=request.Email,
-
                 };
                 await _userCollection.InsertOneAsync(newUser);
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
+                var callbackUrl = "https://maicoland123.herokuapp.com/two-factor-account?userId=" + appUser.Id+"&code="+code;
+
+                MailContent content = new MailContent
+                {
+                    To = request.Email,
+                    Subject = "Xác thực tài khoản email ",
+                    Body = "<p><strong>Xin chào" + request.FullName +" </strong></p> " + "<p> Vui lòng nhấn vào đường <a href=\"" + callbackUrl+"\" > link</a> sau đây để xác thực tài khoản đăng nhập vào MaiCoLand</p>"
+
+                };
+
+
+                await _sendMailService.SendMail(content);
                 return true; 
             }
                 return false; 

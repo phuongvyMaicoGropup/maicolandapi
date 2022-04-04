@@ -17,6 +17,7 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.1" />
     <PackageReference Include="AWSSDK.S3" Version="3.7.8.4" />
+    <PackageReference Include="MailKit" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,8 +26,13 @@
     <None Remove="AWSSDK.Core" />
     <None Remove="AWSSDK.Extensions.NETCore.Setup" />
     <None Remove="Query\" />
+    <None Remove="MailKit" />
+    <None Remove="Service\" />
+    <None Remove="Pages\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Query\" />
+    <Folder Include="Service\" />
+    <Folder Include="Pages\" />
   </ItemGroup>
 </Project>

@@ -47,11 +47,11 @@ namespace MaicoLand.Models.Entities
         [BsonElement]
         public Address Address { set; get; }
         [BsonElement]
-        public int Views { set; get; }
+        public int Viewed { set; get; }
         [BsonElement]
         public int Saved { set; get; }
         [BsonElement]
-        public bool IsPrivate { set; get; }
+        public bool IsPrivated { set; get; }
 
 
     }

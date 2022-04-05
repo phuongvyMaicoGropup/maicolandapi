@@ -12,8 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-
-using System.Threading.Tasks;
 using MaicoLand.Repositories.InterfaceRepositories;
 using MongoDB.Driver;
 using MaicoLand.Models;

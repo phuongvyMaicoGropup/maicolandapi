@@ -135,25 +135,7 @@ namespace MaicoLand.Controllers
 
             return NoContent();
         }
-        [HttpPut("{landId:length(24)}/like")]
-        public async Task<IActionResult> LikePost(string landId, string userId)
-        {
-            var land = await _landPlanningRepository.GetAsync(landId);
-
-            if (land is null)
-            {
-                return NotFound();
-            }
-            if (!land.Likes.Any(userId.Contains))
-            {
-                land.Likes.Add(userId);
-            }
-                
-
-            await _landPlanningRepository.UpdateAsync(landId, land);
-
-            return NoContent();
-        }
+        
 
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)

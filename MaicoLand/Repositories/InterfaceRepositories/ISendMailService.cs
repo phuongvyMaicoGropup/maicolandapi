@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MaicoLand.Models;
+using MaicoLand.Models.StructureType;
 
 namespace MaicoLand.Repositories.InterfaceRepositories
 {

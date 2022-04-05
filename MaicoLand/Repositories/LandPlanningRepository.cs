@@ -1,4 +1,6 @@
 ﻿using MaicoLand.Models;
+using MaicoLand.Models.Entities;
+using MaicoLand.Models.StructureType;
 using MaicoLand.Repositories.InterfaceRepositories;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -73,10 +75,7 @@ namespace MaicoLand.Repositories
 
 
         }
-
-        public List<LandPlanning> GetLandByAuthorId(string id)
-        {
-            return _landPlanningCollection.AsQueryable<LandPlanning>().Where(a => a.CreatedBy == id).ToList(); 
-        }
+ 
+        public List<LandPlanning> GetLandByAuthorId(string id)=> _landPlanningCollection.AsQueryable<LandPlanning>().Where(a => a.CreatedBy == id).ToList();
     }
 }

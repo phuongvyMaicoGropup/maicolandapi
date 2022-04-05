@@ -21,6 +21,9 @@ using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using MaicoLand.Models.StructureType;
+using MaicoLand.Models.Entities;
+using MaicoLand.Models.Requests;
 
 namespace MaicoLand.Repositories
 {

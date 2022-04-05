@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MaicoLand.Models
+namespace MaicoLand.Models.StructureType
 {
     [CollectionName("NewsStatus")]
     public class NewsStatus

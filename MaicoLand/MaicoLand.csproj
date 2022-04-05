@@ -29,10 +29,20 @@
     <None Remove="MailKit" />
     <None Remove="Service\" />
     <None Remove="Pages\" />
+    <None Remove="Models\Requests\" />
+    <None Remove="Models\Responses\" />
+    <None Remove="Models\Entities\" />
+    <None Remove="Models\Enums\" />
+    <None Remove="Models\StructureType\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Query\" />
     <Folder Include="Service\" />
     <Folder Include="Pages\" />
+    <Folder Include="Models\Requests\" />
+    <Folder Include="Models\Responses\" />
+    <Folder Include="Models\Entities\" />
+    <Folder Include="Models\Enums\" />
+    <Folder Include="Models\StructureType\" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,7 @@
 //WI9AFNgbYFVV
 using MaicoLand.Models;
+using MaicoLand.Models.Entities;
+using MaicoLand.Models.StructureType;
 using MaicoLand.Repositories;
 using MaicoLand.Repositories.InterfaceRepositories;
 using Microsoft.AspNetCore.Builder;
@@ -41,7 +43,8 @@ namespace MaicoLand
             services.AddRazorPages();
             services.AddControllers();
             var mongoDbSettings = Configuration.GetSection(nameof(MaicoLandDatabaseSettings)).Get<MaicoLandDatabaseSettings>();
-            services.AddTransient<INewsRepository, NewsRepository>();
+            services.AddTransient<IPostRepository<News>, NewsRepository>();
+            services.AddTransient<IPostRepository<SalePost>, SalePostRepository>();
             services.AddTransient<IFileRepository, FileRepository>();
             services.AddTransient<ILandPlanningRepository, LandPlanningRepository>();
             services.AddTransient<IUserRepository, UserRepository>();

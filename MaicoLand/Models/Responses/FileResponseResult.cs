@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MaicoLand.Models
+namespace MaicoLand.Models.Responses
 {
     public class FileResponseResult
     {

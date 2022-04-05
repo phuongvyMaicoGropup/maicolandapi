@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MaicoLand.Models
+namespace MaicoLand.Models.Enums
 {
     public enum NewsType
     {

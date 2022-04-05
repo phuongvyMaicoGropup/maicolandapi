@@ -1,4 +1,6 @@
 ﻿using MaicoLand.Models;
+using MaicoLand.Models.Entities;
+using MaicoLand.Models.Requests;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

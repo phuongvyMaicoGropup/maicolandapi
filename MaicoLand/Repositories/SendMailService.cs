@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using MaicoLand.Models;
+using MaicoLand.Models.StructureType;
 using MaicoLand.Repositories.InterfaceRepositories;
 using MailKit.Security;
 using Microsoft.Extensions.Logging;

@@ -1,4 +1,6 @@
 ﻿using MaicoLand.Models;
+using MaicoLand.Models.Entities;
+using MaicoLand.Models.StructureType;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +19,8 @@ namespace MaicoLand.Repositories.InterfaceRepositories
 
         public Task RemoveAsync(string id);
         public List<LandPlanning> GetLandByKeyword(string key, string addressId1, string addressId2);
+        public List<LandPlanning> GetLandByAuthorId(string id); 
 
-        public List<LandPlanning> GetLandByAuthorId(string id);
 
 
     }

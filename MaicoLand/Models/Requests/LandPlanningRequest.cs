@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using MaicoLand.Models.StructureType;
 
-namespace MaicoLand.Models
+namespace MaicoLand.Models.Requests
 {
     public class LandPlanningRequest
     {

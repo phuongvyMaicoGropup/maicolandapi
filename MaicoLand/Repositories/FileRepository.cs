@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Amazon.S3;
 using Amazon.S3.Model;
 using MaicoLand.Models;
+using MaicoLand.Models.StructureType;
 using MaicoLand.Repositories.InterfaceRepositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

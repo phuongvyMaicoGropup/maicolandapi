@@ -1,4 +1,6 @@
 ﻿using MaicoLand.Models;
+using MaicoLand.Models.Entities;
+using MaicoLand.Models.StructureType;
 using MaicoLand.Repositories.InterfaceRepositories;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MaicoLand.Repositories
 {
-    public class NewsRepository  : INewsRepository
+    public class NewsRepository  : IPostRepository<News>
     {
         private readonly IMongoCollection<News> _newsCollection;
 
@@ -39,15 +41,13 @@ namespace MaicoLand.Repositories
  
         public async Task RemoveAsync(string id) =>
             await _newsCollection.DeleteOneAsync(x => x.Id == id);
-        public List<News> GetNewsByKeyword(string key)
+       
+
+        public List<News> GetItemByKeyword(string key)
         {
-
-            return _newsCollection.AsQueryable<News>().Where(a => (a.Title.Contains(key))).ToList(); 
-
-
+            return _newsCollection.AsQueryable<News>().Where(a => (a.Title.Contains(key))).ToList();
         }
-        public List<News> GetNewsByAuthorId(string id)=> _newsCollection.AsQueryable<News>().Where(a => a.CreatedBy == id).ToList();
-        
 
+        public List<News> GetItemByAuthorId(string id)=> _newsCollection.AsQueryable<News>().Where(a => a.CreatedBy == id).ToList();
     }
 }

@@ -1,4 +1,7 @@
 ﻿using MaicoLand.Models;
+using MaicoLand.Models.Entities;
+using MaicoLand.Models.Requests;
+using MaicoLand.Models.StructureType;
 using MaicoLand.Repositories.InterfaceRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,7 @@
 ﻿using MaicoLand.Models;
+using MaicoLand.Models.Entities;
+using MaicoLand.Models.Requests;
+using MaicoLand.Models.StructureType;
 using MaicoLand.Repositories.InterfaceRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +18,10 @@ namespace MaicoLand.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
-        private readonly INewsRepository _newsRepository;
+        private readonly IPostRepository<News> _newsRepository;
         private readonly IFileRepository _fileRepository;
 
-        public NewsController(INewsRepository newsRepository, IFileRepository fileRepository)
+        public NewsController(IPostRepository<News> newsRepository, IFileRepository fileRepository)
         {
             _newsRepository = newsRepository;
             _fileRepository = fileRepository; 
@@ -62,7 +65,7 @@ namespace MaicoLand.Controllers
         [HttpGet("search")]
         public async Task<List<News>> Search(string searchKey)
         {
-            List<News> newsList = _newsRepository.GetNewsByKeyword(searchKey);
+            List<News> newsList = _newsRepository.GetItemByKeyword(searchKey);
             //foreach (var item in newsList)
             //{
             //    item.Images.ForEach(async i => i = await _fileRepository.GetLinkFileAsync(i));
@@ -126,7 +129,7 @@ namespace MaicoLand.Controllers
         [HttpGet("author/{id:length(24)}")]
         public async Task<List<News>> SearchNewsByAuthorId(string id)
         {
-            var newsList = _newsRepository.GetNewsByAuthorId(id);
+            var newsList = _newsRepository.GetItemByAuthorId(id);
             //foreach (var item in newsList)
             //{
             //    item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);

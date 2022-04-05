@@ -1,16 +1,16 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDbGenericRepository.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
+using MaicoLand.Models.Enums;
+using MaicoLand.Models.StructureType;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDbGenericRepository.Attributes;
 
 namespace MaicoLand.Models
 {
-    [CollectionName("News")]
-    public class News
+    
+    [CollectionName("SalePost")]
+    public class SalePost
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
@@ -19,23 +19,31 @@ namespace MaicoLand.Models
         [BsonElement]
         [Required]
         public string Title { set; get; }
-        [Required]
         [BsonElement]
+        public Address Address { set; get; }
+        [BsonElement]
+        public GeoPoint Point { set; get; }
+        [BsonElement]
+        public bool IsAvailable { set; get; }
+        [BsonElement]
+        public bool IsNegotiable { set; get; }
+        
+[BsonElement]
         public string Content { set; get; }
         [BsonElement]
-        public List<string> HashTags { set; get; } = new List<string>(); 
+        public double Area { set; get; }
         [BsonElement]
-        public List<string> Images { set; get; }=new List<string>();
+        public double Cost { set; get; }
         [BsonElement]
-        public List<string> Likes { set; get; } = new List<string>(); 
+        public List<string> Images { set; get; } = new List<string>();
         [BsonElement]
-        public DateTime CreatedDate { set; get; }
+        public DateTime CreatedDate { set; get; } 
         [BsonElement]
         public string CreatedBy { set; get; }
         [BsonElement]
         public DateTime UpdatedDate { set; get; }
         [BsonElement]
-        public NewsType Type { set; get; }
+        public SalePostType Type { set; get; }
         [BsonElement]
         public int Views { set; get; }
         [BsonElement]

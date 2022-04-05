@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MaicoLand.Models.Entities;
 
 namespace MaicoLand.Models
 {
@@ -43,6 +44,16 @@ namespace MaicoLand.Models
                          .Take(pageSize)
                          .ToList();
             return new PagedList<LandPlanning>(items, count, pageNumber, pageSize);
+        }
+        public static PagedList<SalePost> ToSalePostPagedList(IQueryable<SalePost> source, int pageNumber, int pageSize)
+        {
+            var count = source.Count();
+            var items = source
+                .Skip((pageNumber - 1) * pageSize).OrderByDescending(a => a.CreatedDate)
+
+                         .Take(pageSize)
+                         .ToList();
+            return new PagedList<SalePost>(items, count, pageNumber, pageSize);
         }
 
     }

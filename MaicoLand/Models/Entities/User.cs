@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace MaicoLand.Models
+namespace MaicoLand.Models.Entities
 {
     public class User
     {

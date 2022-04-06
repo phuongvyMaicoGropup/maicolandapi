@@ -59,7 +59,8 @@ namespace MaicoLand.Pages
             {
                 StatusMessage = "Lỗi xác nhận email : ";
                 var s = (from error in result.Errors
-                              select error).Distinct().ToList();
+                              select error).ToList();
+                s.ForEach(s => Console.WriteLine(s.ToString())); 
                 StatusMessage += s.ToString(); 
             }
         }

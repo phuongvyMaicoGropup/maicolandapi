@@ -46,7 +46,7 @@ namespace MaicoLand.Controllers
         {
             return await _userRepository.CheckEmailAccount(email);
         }
-        [HttpGet("checkemailaccount")]
+        [HttpGet("checkemailconfirmed")]
         [AllowAnonymous]
         public async Task<bool> CheckEmailConfirmed(String email)
         {

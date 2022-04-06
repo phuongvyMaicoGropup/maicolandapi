@@ -51,9 +51,8 @@ namespace MaicoLand
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<ISendMailService, SendMailService>();
-            //services.AddIdentity<User, IdentityRole>()
-            //.AddDefaultTokenProviders();
-
+           
+            
             services.Configure<MaicoLandDatabaseSettings>(Configuration.GetSection(nameof(MaicoLandDatabaseSettings)));
 
             services.AddSingleton<IMaicoLandDatabaseSettings>(sp =>

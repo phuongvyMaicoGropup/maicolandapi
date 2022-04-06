@@ -121,7 +121,11 @@ namespace MaicoLand.Repositories
                 await _userCollection.InsertOneAsync(newUser);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
+                //var EmailConfirmationUrl = Url.Page(
+                //    "/Account/ConfirmEmail",
+                //    pageHandler: null,
+                //    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                //    protocol: Request.Scheme);
                 var callbackUrl = "https://maicoland123.herokuapp.com/two-factor-account?userId=" + appUser.Id+"&code="+code;
 
                 MailContent content = new MailContent

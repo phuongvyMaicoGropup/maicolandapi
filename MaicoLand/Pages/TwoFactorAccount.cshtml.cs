@@ -57,7 +57,10 @@ namespace MaicoLand.Pages
             }
             else
             {
-                StatusMessage = "Lỗi xác nhận email : " + result.Errors.ToString()+user.UserName.ToString();
+                StatusMessage = "Lỗi xác nhận email : ";
+                var s = (from error in result.Errors
+                              select error).Distinct().ToList();
+                StatusMessage += s.ToString(); 
             }
         }
     }

@@ -38,6 +38,7 @@ namespace MaicoLand.Pages
 
 
             var user = await _userManager.FindByIdAsync(userId);
+
             if (user == null)
             {
                 StatusMessage = "none";
@@ -56,7 +57,7 @@ namespace MaicoLand.Pages
             }
             else
             {
-                StatusMessage = "Lỗi xác nhận email : " + result.Errors.ToString();
+                StatusMessage = "Lỗi xác nhận email : " + result.Errors.ToString()+user.UserName.ToString();
             }
         }
     }

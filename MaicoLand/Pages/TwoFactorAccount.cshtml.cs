@@ -47,6 +47,7 @@ namespace MaicoLand.Pages
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             // Xác thực email
             var result = await _userManager.ConfirmEmailAsync(user, code);
+            
 
             if (result.Succeeded)
             {
@@ -55,7 +56,7 @@ namespace MaicoLand.Pages
             }
             else
             {
-                StatusMessage = "Lỗi xác nhận email";
+                StatusMessage = "Lỗi xác nhận email : " + result.Errors.ToString();
             }
         }
     }

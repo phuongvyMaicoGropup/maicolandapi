@@ -135,7 +135,7 @@ namespace MaicoLand.Repositories
 
                 await _sendMailService.SendMail(content);
                 return true; 
-            }
+            }else 
                 return false; 
         }
 

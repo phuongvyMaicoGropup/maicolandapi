@@ -126,6 +126,7 @@ namespace MaicoLand.Repositories
                 //    pageHandler: null,
                 //    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                 //    protocol: Request.Scheme);
+
                 var callbackUrl = "https://maicoland123.herokuapp.com/two-factor-account?userId=" + appUser.Id+"&code="+code;
 
                 MailContent content = new MailContent

@@ -4,6 +4,7 @@ using MaicoLand.Models.Entities;
 using MaicoLand.Models.StructureType;
 using MaicoLand.Repositories;
 using MaicoLand.Repositories.InterfaceRepositories;
+using MaicoLand.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -42,7 +43,7 @@ namespace MaicoLand
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
             });
-
+            services.AddAuthentication(); 
 
             services.AddRazorPages();
             services.AddControllers();
@@ -67,7 +68,7 @@ namespace MaicoLand
             var mailsettings = Configuration.GetSection("MailSettings");  // đọc config
             services.Configure<MailSettings>(mailsettings);
             services.AddIdentity<AppUser, AppRole>().AddMongoDbStores<AppUser, AppRole, Guid>(mongoDbSettings.ConnectionString, mongoDbSettings.DatabaseName).AddDefaultTokenProviders();
-
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             // Enable   CORs
 
@@ -82,6 +83,8 @@ namespace MaicoLand
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MaicoLand", Version = "v1" });
             });
+            services.Configure<DataProtectionTokenProviderOptions>(o =>
+       o.TokenLifespan = TimeSpan.FromHours(3));
 
             // Add services to the container
             //var logger = new LoggerConfiguration().ReadFrom.Configuration(Configuration);

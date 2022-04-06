@@ -17,22 +17,22 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "MaicoLand": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": "true",
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
-    },
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      "publishAllPorts": true,
-      "useSSL": true
+      "environmentVariables": {}
+    },
+    "MaicoLand": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SendGridKey": "u9KTjuwwWDPXcLY4FGFSNv8xrhPBqmrG",
+        "SENDGRID_API_KEY": null
+      }
     }
   }
 }

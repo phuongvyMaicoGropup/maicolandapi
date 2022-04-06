@@ -193,5 +193,15 @@ namespace MaicoLand.Repositories
             }
           
         }
+
+        public async Task<bool> CheckConfirmedEmailAccount(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user.EmailConfirmed)
+            {
+                return true;
+            }
+            else return false; 
+        }
     }
 }

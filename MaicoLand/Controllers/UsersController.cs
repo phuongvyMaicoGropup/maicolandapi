@@ -40,11 +40,17 @@ namespace MaicoLand.Controllers
             }
             return true; 
         }
-        [HttpPost("checkemailaccount")]
+        [HttpGet("checkemailaccount")]
         [AllowAnonymous]
         public async Task<bool> CheckEmailAccount(String email)
         {
             return await _userRepository.CheckEmailAccount(email);
+        }
+        [HttpGet("checkemailaccount")]
+        [AllowAnonymous]
+        public async Task<bool> CheckEmailConfirmed(String email)
+        {
+            return await _userRepository.CheckConfirmedEmailAccount(email);
         }
         [HttpPost("authenticate")]
         [AllowAnonymous]

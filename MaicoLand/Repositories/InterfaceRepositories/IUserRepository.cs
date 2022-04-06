@@ -24,6 +24,7 @@ namespace MaicoLand.Repositories.InterfaceRepositories
         public  Task<string> CheckPhone(string phone);
         public Task<string> Authenticate(LoginRequest request);
         public Task<bool> CheckEmailAccount(String email);
+        public Task<bool> CheckConfirmedEmailAccount(String email);
 
     }
 }

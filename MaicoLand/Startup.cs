@@ -5,6 +5,7 @@ using MaicoLand.Models.StructureType;
 using MaicoLand.Repositories;
 using MaicoLand.Repositories.InterfaceRepositories;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
@@ -15,8 +16,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -40,6 +43,7 @@ namespace MaicoLand
                 options.CheckConsentNeeded = context => true;
             });
 
+
             services.AddRazorPages();
             services.AddControllers();
             var mongoDbSettings = Configuration.GetSection(nameof(MaicoLandDatabaseSettings)).Get<MaicoLandDatabaseSettings>();
@@ -62,15 +66,7 @@ namespace MaicoLand
             services.AddOptions();                                         // Kích hoạt Options
             var mailsettings = Configuration.GetSection("MailSettings");  // đọc config
             services.Configure<MailSettings>(mailsettings);
-
-            services.AddIdentity<AppUser, AppRole>()
-        .AddMongoDbStores<AppUser, AppRole, Guid>
-        (
-        mongoDbSettings.ConnectionString, mongoDbSettings.DatabaseName
-        ).AddDefaultTokenProviders();
-
-
-
+            services.AddIdentity<AppUser, AppRole>().AddMongoDbStores<AppUser, AppRole, Guid>(mongoDbSettings.ConnectionString, mongoDbSettings.DatabaseName).AddDefaultTokenProviders();
 
 
             // Enable   CORs
@@ -79,12 +75,19 @@ namespace MaicoLand
             {
                 c.AddPolicy("AllowOrigin", option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
-            //Json Serializer
+            services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@".\safespot"));
+          
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MaicoLand", Version = "v1" });
             });
+
+            // Add services to the container
+            //var logger = new LoggerConfiguration().ReadFrom.Configuration(Configuration);
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

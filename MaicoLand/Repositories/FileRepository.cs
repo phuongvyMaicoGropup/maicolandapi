@@ -16,7 +16,6 @@ namespace MaicoLand.Repositories
 {
     public class FileRepository : IFileRepository
     {
-        string url = "https://localhost:5001/api/Image/UpFile";
         private AmazonS3Client client;
         public string accessKey;
         public string secretKey;

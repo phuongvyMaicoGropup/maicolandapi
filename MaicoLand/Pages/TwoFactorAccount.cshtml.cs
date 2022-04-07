@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
 
 namespace MaicoLand.Pages
 {
@@ -18,11 +19,17 @@ namespace MaicoLand.Pages
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ILogger<TwoFactorAccountModel> logger;
 
-        public TwoFactorAccountModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+
+        
+
+        public TwoFactorAccountModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ILogger<TwoFactorAccountModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this.logger = logger;
+            logger.LogInformation("Confirmed Email service");
         }
 
         [TempData]
@@ -58,9 +65,10 @@ namespace MaicoLand.Pages
             else
             {
                 StatusMessage = "Lỗi xác nhận email : ";
+
                 var s = (from error in result.Errors
                               select error).ToList();
-                s.ForEach(s => Console.WriteLine(s.ToString())); 
+                s.ForEach(s => logger.LogInformation(s.Description)); 
                 StatusMessage += s.ToString(); 
             }
         }

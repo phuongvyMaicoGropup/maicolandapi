@@ -20,9 +20,11 @@ namespace MaicoLand.Controllers
     {
         private readonly IUserRepository _userRepository;
 
-        public UsersController(IUserRepository userRepository)
+        private ISendMailService _sendMailService;
+        public UsersController(IUserRepository userRepository,ISendMailService sendMailService)
         {
             _userRepository = userRepository;
+            _sendMailService = sendMailService; 
         }
 
         [HttpPost("register")]
@@ -45,6 +47,12 @@ namespace MaicoLand.Controllers
         public async Task<bool> CheckEmailAccount(String email)
         {
             return await _userRepository.CheckEmailAccount(email);
+        }
+        [HttpGet("checksendemail")]
+        [AllowAnonymous]
+        public async Task CheckSendEmail(String email)
+        {
+              _sendMailService.SendEmailAsync(email, "MeoMeo", "Nothing");
         }
         [HttpGet("checkemailconfirmed   ")]
         [AllowAnonymous]

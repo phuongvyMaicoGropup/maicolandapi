@@ -4,8 +4,22 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>1bed04f5-5eb1-4eaf-8108-939321da7d25</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
+  <PropertyGroup>
+    <DefaultItemExcludes>node_modules/**;$(DefaultItemExcludes)</DefaultItemExcludes>
+</PropertyGroup>
 
+<ItemGroup>
+    <Compile Remove="ClientApp\**" />
+    <Content Remove="ClientApp\**" />
+    <EmbeddedResource Remove="ClientApp\**" />
+    <None Remove="ClientApp\**" />
+</ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AspNetCore.Identity.MongoDbCore" Version="3.1.2" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="12.7.0" />

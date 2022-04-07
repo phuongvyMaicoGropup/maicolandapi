@@ -8,6 +8,8 @@ using MailKit.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using SendGrid;
+
 namespace MaicoLand.Repositories
 {
     public class SendMailService : ISendMailService
@@ -61,6 +63,15 @@ namespace MaicoLand.Repositories
             }
 
             smtp.Disconnect(true);
+            //var apiKey = mailSettings.SenderKey; 
+            //var client = new SendGridClient(apiKey);
+            //var from = new SendGrid.Helpers.Mail.EmailAddress(mailSettings.Mail, mailSettings.DisplayName);
+            //var subject = mailContent.Subject;
+            //var to = new SendGrid.Helpers.Mail.EmailAddress(mailContent.To);
+            //var plainTextContent = "";
+            //var htmlContent = mailContent.Body;
+            //var msg = SendGrid.Helpers.Mail.MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            //var response = await client.SendEmailAsync(msg);
 
             logger.LogInformation("send mail to " + mailContent.To);
 

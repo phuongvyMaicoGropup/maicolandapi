@@ -68,8 +68,11 @@ namespace MaicoLand.Pages
 
                 var s = (from error in result.Errors
                               select error).ToList();
-                s.ForEach(s => logger.LogInformation(s.Description)); 
-                StatusMessage += s.ToString(); 
+                s.ForEach(a =>{
+                    logger.LogInformation(a.Code + " : " + a.Description);
+                    StatusMessage += a.Code + " : " + a.Description;
+                }); 
+                
             }
         }
     }

@@ -65,4 +65,5 @@
     <Folder Include="Models\Enums\" />
     <Folder Include="Models\StructureType\" />
   </ItemGroup>
+  
 </Project>

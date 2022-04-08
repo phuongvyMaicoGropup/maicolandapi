@@ -96,6 +96,7 @@ namespace MaicoLand.Controllers
         {
             string item = await _userRepository.CheckPhone(phone);
             StringBuilder sb = new StringBuilder(item);
+
             
 
             if (item.Length <=5)

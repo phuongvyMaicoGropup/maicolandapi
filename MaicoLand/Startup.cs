@@ -42,7 +42,7 @@ namespace MaicoLand
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
             });
-
+            
 
             services.AddRazorPages();
             services.AddControllers();
@@ -78,8 +78,9 @@ namespace MaicoLand
             {
                 c.AddPolicy("AllowOrigin", option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
-            services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@".\safespot"));
-
+            
+            services.AddDataProtection()
+    .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

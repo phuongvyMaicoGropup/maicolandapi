@@ -31,11 +31,8 @@ namespace MaicoLand.Controllers
 
 
             var newsList = _newsRepository.Get(pagingParameter);
-
-            //foreach (var item in newsList)
-            //{
-            //    item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
-            //}
+            newsList.ForEach((n) => n.Images.ForEach(async (i) => i = await _fileRepository.GetLinkFileAsync(i)));
+     
 
             var metaData = new
             {
@@ -53,7 +50,8 @@ namespace MaicoLand.Controllers
         public async Task<ActionResult<News>> Get(string id)
         {
             var news = await _newsRepository.GetAsync(id);
-             //news.Images.ForEach(async i => i = await _fileRepository.GetLinkFileAsync(i)) ;
+           news.Images.ForEach(async (i) => i = await _fileRepository.GetLinkFileAsync(i));
+
 
             if (news is null)
             {
@@ -66,11 +64,8 @@ namespace MaicoLand.Controllers
         public async Task<List<News>> Search(string searchKey)
         {
             List<News> newsList = _newsRepository.GetItemByKeyword(searchKey);
-            //foreach (var item in newsList)
-            //{
-            //    item.Images.ForEach(async i => i = await _fileRepository.GetLinkFileAsync(i));
-
-            //}
+        
+            newsList.ForEach((n) => n.Images.ForEach(async (i) => i = await _fileRepository.GetLinkFileAsync(i)));
 
 
             return newsList;
@@ -130,10 +125,9 @@ namespace MaicoLand.Controllers
         public async Task<List<News>> SearchNewsByAuthorId(string id)
         {
             var newsList = _newsRepository.GetItemByAuthorId(id);
-            //foreach (var item in newsList)
-            //{
-            //    item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
-            //}
+            newsList.ForEach((n) => n.Images.ForEach(async (i) => i = await _fileRepository.GetLinkFileAsync(i)));
+
+           
             return newsList;
         }
 

@@ -66,7 +66,7 @@ namespace MaicoLand.Repositories
             cors_rule.AllowedHeaders = new List<string> { "*" };
             cors_rule.AllowedMethods = new List<string> { "GET" };
             cors_rule.AllowedOrigins = new List<string> { "*" };
-            cors_rule.MaxAgeSeconds = 6000;
+            cors_rule.MaxAgeSeconds = 60*60*24*3;
 
             CORSConfiguration cors_config = new CORSConfiguration();
             cors_config.Rules = new List<CORSRule> { cors_rule };
@@ -80,7 +80,7 @@ namespace MaicoLand.Repositories
             GetPreSignedUrlRequest request_generate_url = new GetPreSignedUrlRequest();
             request_generate_url.BucketName = bucketName;
             request_generate_url.Key = path;
-            request_generate_url.Expires = DateTime.Now.AddMinutes(60);
+            request_generate_url.Expires = DateTime.Now.AddDays(3);
             return client.GetPreSignedURL(request_generate_url);
         }
 

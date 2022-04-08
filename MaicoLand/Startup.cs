@@ -78,9 +78,9 @@ namespace MaicoLand
             {
                 c.AddPolicy("AllowOrigin", option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
-            
-            services.AddDataProtection()
-    .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
+            services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@".\safespot")); 
+    //        Services.AddDataProtection()
+    //.SetDefaultKeyLifetime(TimeSpan.FromDays(14));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

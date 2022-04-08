@@ -36,11 +36,15 @@ namespace MaicoLand.Controllers
                 var result = await _userRepository.Register(request);
                 if (!result)
                 {
+                    Console.WriteLine(result);
                     return false; 
                 }
                 return true; 
             }
-            return true; 
+            else
+            {
+                return false; 
+            }
         }
         [HttpGet("checkemailaccount")]
         [AllowAnonymous]

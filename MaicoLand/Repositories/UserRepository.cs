@@ -102,45 +102,60 @@ namespace MaicoLand.Repositories
             
             if (user == null)
             {
-                AppUser newAppUser = new AppUser
+                try
                 {
-                    UserName = request.UserName,
-                    Email = request.Email,
-                };
+                    Console.WriteLine("Don't have account");
+                    AppUser newAppUser = new AppUser
+                    {
+                        UserName = request.UserName,
+                        Email = request.Email,
+                    };
 
-                IdentityResult result = await _userManager.CreateAsync(newAppUser, request.Password);
-                AppUser appUser = await _userManager.FindByNameAsync(request.UserName);
-                User newUser = new User
+                    IdentityResult result = await _userManager.CreateAsync(newAppUser, request.Password);
+                    AppUser appUser = await _userManager.FindByNameAsync(request.UserName);
+                    User newUser = new User
+                    {
+                        FullName = request.FullName,
+                        UserName = request.UserName,
+                        //PhotoURL = "",
+                        PhoneNumber = request.PhoneNumber,
+                        Email = request.Email,
+                    };
+                    await _userCollection.InsertOneAsync(newUser);
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
+                    //Console.WriteLine(code);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    //var EmailConfirmationUrl = Url.Page(
+                    //    "/Account/ConfirmEmail",
+                    //    pageHandler: null,
+                    //    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                    //    protocol: Request.Scheme);
+                    var callbackUrl = "https://maicoland123.herokuapp.com/two-factor-account?userId=" + appUser.Id + "&code=" + code;
+
+                    MailContent content = new MailContent
+                    {
+                        To = request.Email,
+                        Subject = "Xác thực tài khoản email ",
+                        Body = "<p><strong>Xin chào" + request.FullName + " </strong></p> " + "<p> Vui lòng nhấn vào đường <a href=\"" + callbackUrl + "\" > link</a> sau đây để xác thực tài khoản đăng nhập vào MaiCoLand</p>"
+
+                    };
+
+
+                    await _sendMailService.SendMail(content);
+                    return true;
+                }catch(Exception e)
                 {
-                    FullName = request.FullName,
-                    UserName = request.UserName,
-                    //PhotoURL = "",
-                    PhoneNumber = request.PhoneNumber,
-                    Email=request.Email,
-                };
-                await _userCollection.InsertOneAsync(newUser);
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
-                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                //var EmailConfirmationUrl = Url.Page(
-                //    "/Account/ConfirmEmail",
-                //    pageHandler: null,
-                //    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                //    protocol: Request.Scheme);
-                var callbackUrl = "https://maicoland123.herokuapp.com/two-factor-account?userId=" + appUser.Id+"&code="+code;
+                    Console.WriteLine(e);
+                    return false; 
+                }
+                
+                
+            }else
+            {
+                Console.WriteLine("Register We have account");
+                return false;
 
-                MailContent content = new MailContent
-                {
-                    To = request.Email,
-                    Subject = "Xác thực tài khoản email ",
-                    Body = "<p><strong>Xin chào" + request.FullName +" </strong></p> " + "<p> Vui lòng nhấn vào đường <a href=\"" + callbackUrl+"\" > link</a> sau đây để xác thực tài khoản đăng nhập vào MaiCoLand</p>"
-
-                };
-
-
-                await _sendMailService.SendMail(content);
-                return true; 
-            }else 
-                return false; 
+            }
         }
 
         public async Task<List<User>> GetAsync() =>

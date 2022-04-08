@@ -66,8 +66,11 @@ namespace MaicoLand
             services.AddOptions();                                         // Kích hoạt Options
             var mailsettings = Configuration.GetSection("MailSettings");  // đọc config
             services.Configure<MailSettings>(mailsettings);
-            services.AddIdentity<AppUser, AppRole>().AddMongoDbStores<AppUser, AppRole, Guid>(mongoDbSettings.ConnectionString, mongoDbSettings.DatabaseName).AddDefaultTokenProviders();
-
+            services.AddIdentity<AppUser, AppRole>()
+                .AddMongoDbStores<AppUser, AppRole, Guid>(mongoDbSettings.ConnectionString, mongoDbSettings.DatabaseName)
+                .AddDefaultTokenProviders()
+               ;
+            //services.AddAuthentication().Add
 
             // Enable   CORs
 
@@ -76,7 +79,7 @@ namespace MaicoLand
                 c.AddPolicy("AllowOrigin", option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
             services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@".\safespot"));
-          
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

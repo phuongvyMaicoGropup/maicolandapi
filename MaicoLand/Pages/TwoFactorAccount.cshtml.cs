@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using MaicoLand.Models;
 using MaicoLand.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -52,7 +53,7 @@ namespace MaicoLand.Pages
 
             }
 
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+            code = HttpUtility.UrlEncode(code);
             // Xác thực email
             var result = await _userManager.ConfirmEmailAsync(user, code);
             

@@ -140,6 +140,22 @@ namespace MaicoLand.Controllers
 
             return NoContent();
         }
+        //[HttpGet("commenthashtags")]
+        //public async Task<List<String>> GetCommonHashTags()
+        //{
+        //    var news = await _newsRepository.GetAsync(id);
+
+        //    if (news is null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    updatedNews.Id = news.Id;
+
+        //    await _newsRepository.UpdateAsync(id, updatedNews);
+
+        //    return NoContent();
+        //}
 
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)

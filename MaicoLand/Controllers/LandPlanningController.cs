@@ -1,5 +1,4 @@
-﻿using MaicoLand.Models;
-using MaicoLand.Models.Entities;
+﻿using MaicoLand.Models.Entities;
 using MaicoLand.Models.Requests;
 using MaicoLand.Models.StructureType;
 using MaicoLand.Repositories.InterfaceRepositories;
@@ -30,12 +29,12 @@ namespace MaicoLand.Controllers
         public async Task<IActionResult> Get([FromQuery] PagingParameter pagingParameter)
         {
             var landPlanningList = _landPlanningRepository.Get(pagingParameter);
-            //foreach(var item in landPlanningList)
-            //{
-            //    item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
-            //    item.FilePdfUrl = await _fileRepository.GetLinkFileAsync(item.FilePdfUrl);
+            foreach (var item in landPlanningList)
+            {
+                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+                item.DetailInfo = await _fileRepository.GetLinkFileAsync(item.DetailInfo);
 
-            //}
+            }
             var metaData = new
             {
                 landPlanningList.TotalCount,
@@ -53,8 +52,8 @@ namespace MaicoLand.Controllers
         public async Task<ActionResult<LandPlanning>> Get(string id)
         {
             var item = await _landPlanningRepository.GetAsync(id);
-            //item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
-            //item.FilePdfUrl = await _fileRepository.GetLinkFileAsync(item.FilePdfUrl);
+            item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+            item.DetailInfo = await _fileRepository.GetLinkFileAsync(item.DetailInfo);
 
             if (item is null)
             {
@@ -72,12 +71,12 @@ namespace MaicoLand.Controllers
 
 
             List<LandPlanning> landPlanningList = _landPlanningRepository.GetLandByKeyword(searchKey,idAddress1,idAddress2);
-            //foreach (var item in landPlanningList)
-            //{
-            //    item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
-            //    item.FilePdfUrl = await _fileRepository.GetLinkFileAsync(item.FilePdfUrl);
+            foreach (var item in landPlanningList)
+            {
+                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+                item.DetailInfo = await _fileRepository.GetLinkFileAsync(item.DetailInfo);
 
-            //}
+            }
 
 
 
@@ -88,6 +87,12 @@ namespace MaicoLand.Controllers
         {
 
             List<LandPlanning> landPlanningList = _landPlanningRepository.GetLandByAuthorId(id);
+            foreach (var item in landPlanningList)
+            {
+                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+                item.DetailInfo = await _fileRepository.GetLinkFileAsync(item.DetailInfo);
+
+            }
 
             return landPlanningList;
         }

@@ -140,7 +140,39 @@ namespace MaicoLand.Controllers
 
             return NoContent();
         }
-        
+        [HttpPut("viewed/{id:length(24)}")]
+        public async Task<IActionResult> UpdateViewed(string id)
+        {
+            var land = await _landPlanningRepository.GetAsync(id);
+
+            if (land is null)
+            {
+                return NotFound();
+            }
+
+            land.Viewed++;
+
+            await _landPlanningRepository.UpdateAsync(id, land);
+
+            return NoContent();
+        }
+        [HttpPut("saved/{id:length(24)}")]
+        public async Task<IActionResult> UpdateSaved(string id)
+        {
+            var news = await _landPlanningRepository.GetAsync(id);
+
+            if (news is null)
+            {
+                return NotFound();
+            }
+
+            news.Saved++;
+
+            await _landPlanningRepository.UpdateAsync(id, news);
+
+            return NoContent();
+        }
+
 
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)

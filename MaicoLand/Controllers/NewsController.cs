@@ -140,6 +140,38 @@ namespace MaicoLand.Controllers
 
             return NoContent();
         }
+        [HttpPut("viewed/{id:length(24)}")]
+        public async Task<IActionResult> UpdateViewed(string id)
+        {
+            var news = await _newsRepository.GetAsync(id);
+
+            if (news is null)
+            {
+                return NotFound();
+            }
+
+            news.Viewed++;
+
+            await _newsRepository.UpdateAsync(id, news);
+
+            return NoContent();
+        }
+        [HttpPut("saved/{id:length(24)}")]
+        public async Task<IActionResult> UpdateSaved(string id)
+        {
+            var news = await _newsRepository.GetAsync(id);
+
+            if (news is null)
+            {
+                return NotFound();
+            }
+
+            news.Saved++;
+
+            await _newsRepository.UpdateAsync(id, news);
+
+            return NoContent();
+        }
         //[HttpGet("commenthashtags")]
         //public async Task<List<String>> GetCommonHashTags()
         //{

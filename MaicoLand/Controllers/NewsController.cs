@@ -190,12 +190,25 @@ namespace MaicoLand.Controllers
             return NoContent();
         }
         [HttpGet("author/{id:length(24)}")]
-        public async Task<List<String>> SearchNewsByAuthorId(string id)
+        public  List<String> SearchNewsByAuthorId(string id)
         {
             return _newsRepository.GetItemByAuthorId(id);
           
         }
+        [HttpGet("topviewed")]
+        public  List<String> GetTopViewedNews()
+        {
+            return _newsRepository.GetTopViewedNews();
 
-        
+        }
+
+        [HttpGet("topsaved")]
+        public List<String> GetTopSavedNews()
+        {
+            return _newsRepository.GetTopSavedNews();
+
+        }
+
+
     }
 }

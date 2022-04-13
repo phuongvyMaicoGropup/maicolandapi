@@ -49,7 +49,9 @@ namespace MaicoLand.Repositories
         }
 
         public List<String> GetItemByAuthorId(string id)=> _newsCollection.AsQueryable<News>().Where(a => a.CreatedBy == id).Select((a)=> a.Id).ToList();
+        public List<String> GetTopViewedNews() => _newsCollection.AsQueryable<News>().OrderBy(a=> a.Viewed).Take(5).Select((a) => a.Id).ToList();
+        public List<String> GetTopSavedNews() => _newsCollection.AsQueryable<News>().OrderBy(a => a.Saved).Take(5).Select((a) => a.Id).ToList();
 
-    
+
     }
 }

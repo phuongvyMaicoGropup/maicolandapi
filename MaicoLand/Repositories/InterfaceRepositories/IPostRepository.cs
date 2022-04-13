@@ -17,7 +17,9 @@ namespace MaicoLand.Repositories.InterfaceRepositories
         public Task UpdateAsync(string id, T updatedItem);
         public List<String> GetItemByKeyword(string key); 
         public Task RemoveAsync(string id);
+        public List<String> GetTopViewedNews();
         public List<String> GetItemByAuthorId(string id);
+        public List<String> GetTopSavedNews();
 
     }
 }

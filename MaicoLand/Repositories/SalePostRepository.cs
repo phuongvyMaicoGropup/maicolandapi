@@ -26,17 +26,17 @@ namespace MaicoLand.Repositories
         public async Task CreateAsync(SalePost newItems)=>
             await collection.InsertOneAsync(newItems);
 
-        public PagedList<SalePost> Get(PagingParameter pagingParameter)
+        public PagedList<String> Get(PagingParameter pagingParameter)
         {
-            return PagedList<SalePost>.ToSalePostPagedList(collection.AsQueryable<SalePost>(), pagingParameter.pageNumber, pagingParameter.pageSize);
+            return PagedList<String>.ToSalePostPagedList(collection.AsQueryable<SalePost>(), pagingParameter.pageNumber, pagingParameter.pageSize);
 
         }
 
         public async Task<SalePost> GetAsync(string id) =>
             await collection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-        public List<SalePost> GetItemByAuthorId(string id)=> collection.AsQueryable<SalePost>().Where(a => a.CreatedBy == id).ToList();
-        public List<SalePost> GetItemByKeyword(string key)=> collection.AsQueryable<SalePost>().Where(a => (a.Title.Contains(key))).ToList();
+        public List<String> GetItemByAuthorId(string id)=> collection.AsQueryable<SalePost>().Where(a => a.CreatedBy == id).Select((a=> a.Id)).ToList();
+        public List<String> GetItemByKeyword(string key)=> collection.AsQueryable<SalePost>().Where(a => (a.Title.Contains(key))).Select((a => a.Id)).ToList();
 
         public async Task RemoveAsync(string id)=> await collection.DeleteOneAsync(x => x.Id == id);
 

@@ -56,17 +56,10 @@ namespace MaicoLand.Controllers
             return item;
         }
         [HttpGet("search")]
-        public async Task<List<SalePost>> Search(string searchKey)
+        public List<string> Search(string searchKey)
         {
-            List<SalePost> newsList = _salePostRepository.GetItemByKeyword(searchKey);
-            //foreach (var item in newsList)
-            //{
-            //    item.Images.ForEach(async i => i = await _fileRepository.GetLinkFileAsync(i));
-
-            //}
-
-
-            return newsList;
+            return _salePostRepository.GetItemByKeyword(searchKey);
+        
         }
 
         [HttpPost("create")]
@@ -126,7 +119,7 @@ namespace MaicoLand.Controllers
             return true; 
         }
         [HttpGet("author/{id:length(24)}")]
-        public async Task<List<SalePost>> SearchNewsByAuthorId(string id)
+        public List<string>SearchNewsByAuthorId(string id)
         => _salePostRepository.GetItemByAuthorId(id);
           
 

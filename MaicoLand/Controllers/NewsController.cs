@@ -32,20 +32,7 @@ namespace MaicoLand.Controllers
 
             var newsList = _newsRepository.Get(pagingParameter);
 
-            var listFile = new List<String>();
-            foreach (var item in newsList)
-            {
-                listFile = new List<String>();
-                foreach (var i in item.Images)
-                {
-                    listFile.Add(await _fileRepository.GetLinkFileAsync(i));
-                    Console.WriteLine(listFile);
-                    item.Images = listFile;
-                }
-
-
-
-            }
+            
 
             var metaData = new
             {
@@ -68,7 +55,6 @@ namespace MaicoLand.Controllers
                 foreach (var i in news.Images)
                 {
                     listFile.Add(await _fileRepository.GetLinkFileAsync(i));
-                    Console.WriteLine(listFile);
                     news.Images = listFile;
                 }
 
@@ -84,23 +70,23 @@ namespace MaicoLand.Controllers
             return news;
         }
         [HttpGet("search")]
-        public async Task<List<News>> Search(string searchKey)
+        public async Task<List<String>> Search(string searchKey)
         {
-            List<News> newsList = _newsRepository.GetItemByKeyword(searchKey);
-            var listFile = new List<String>();
-            foreach (var item in newsList)
-            {
-                listFile = new List<String>();
-                foreach (var i in item.Images)
-                {
-                    listFile.Add(await _fileRepository.GetLinkFileAsync(i));
-                    Console.WriteLine(listFile);
-                    item.Images = listFile;
-                }
+            List<String> newsList = _newsRepository.GetItemByKeyword(searchKey);
+            //var listFile = new List<String>();
+            //foreach (var item in newsList)
+            //{
+            //    listFile = new List<String>();
+            //    foreach (var i in item.Images)
+            //    {
+            //        listFile.Add(await _fileRepository.GetLinkFileAsync(i));
+            //        Console.WriteLine(listFile);
+            //        item.Images = listFile;
+            //    }
 
 
 
-            }
+            //}
 
             return newsList;
         }
@@ -204,24 +190,10 @@ namespace MaicoLand.Controllers
             return NoContent();
         }
         [HttpGet("author/{id:length(24)}")]
-        public async Task<List<News>> SearchNewsByAuthorId(string id)
+        public async Task<List<String>> SearchNewsByAuthorId(string id)
         {
-            var newsList = _newsRepository.GetItemByAuthorId(id);
-            var listFile =new List<String>(); 
-            foreach (var item in newsList)
-            {
-                listFile = new List<String>();
-            foreach (var i in item.Images)
-                {
-                    listFile.Add(await _fileRepository.GetLinkFileAsync(i));
-                    Console.WriteLine(listFile);
-                    item.Images = listFile; 
-                }
-
-
-                
-            }
-            return newsList;
+            return _newsRepository.GetItemByAuthorId(id);
+          
         }
 
         

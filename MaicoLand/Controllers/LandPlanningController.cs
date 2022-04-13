@@ -29,12 +29,12 @@ namespace MaicoLand.Controllers
         public async Task<IActionResult> Get([FromQuery] PagingParameter pagingParameter)
         {
             var landPlanningList = _landPlanningRepository.Get(pagingParameter);
-            foreach (var item in landPlanningList)
-            {
-                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
-                item.DetailInfo = await _fileRepository.GetLinkFileAsync(item.DetailInfo);
+            //foreach (var item in landPlanningList)
+            //{
+            //    item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+            //    item.DetailInfo = await _fileRepository.GetLinkFileAsync(item.DetailInfo);
 
-            }
+            //}
             var metaData = new
             {
                 landPlanningList.TotalCount,
@@ -63,36 +63,36 @@ namespace MaicoLand.Controllers
             return item;
         }
         [HttpGet("search")]
-        public async Task<List<LandPlanning>> Search(string searchKey, string idAddress1 , string idAddress2)
+        public async Task<List<String>> Search(string searchKey, string idAddress1 , string idAddress2)
         {
             if (idAddress1 is null) idAddress1 = "";
             if (idAddress2 is null) idAddress2 = "";
             if (searchKey is null) searchKey = "";
 
 
-            List<LandPlanning> landPlanningList = _landPlanningRepository.GetLandByKeyword(searchKey,idAddress1,idAddress2);
-            foreach (var item in landPlanningList)
-            {
-                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
-                item.DetailInfo = await _fileRepository.GetLinkFileAsync(item.DetailInfo);
+            List<String> landPlanningList = _landPlanningRepository.GetLandByKeyword(searchKey,idAddress1,idAddress2);
+            //foreach (var item in landPlanningList)
+            //{
+            //    item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+            //    item.DetailInfo = await _fileRepository.GetLinkFileAsync(item.DetailInfo);
 
-            }
+            //}
 
 
 
             return landPlanningList;
         }
         [HttpGet("author/{id:length(24)}")]
-        public async Task<List<LandPlanning>> SearchLandByAuthorId(string id)
+        public async Task<List<string>> SearchLandByAuthorId(string id)
         {
 
-            List<LandPlanning> landPlanningList = _landPlanningRepository.GetLandByAuthorId(id);
-            foreach (var item in landPlanningList)
-            {
-                item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
-                item.DetailInfo = await _fileRepository.GetLinkFileAsync(item.DetailInfo);
+            List<string> landPlanningList = _landPlanningRepository.GetLandByAuthorId(id);
+            //foreach (var item in landPlanningList)
+            //{
+            //    item.ImageUrl = await _fileRepository.GetLinkFileAsync(item.ImageUrl);
+            //    item.DetailInfo = await _fileRepository.GetLinkFileAsync(item.DetailInfo);
 
-            }
+            //}
 
             return landPlanningList;
         }

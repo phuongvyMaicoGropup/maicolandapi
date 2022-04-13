@@ -24,12 +24,12 @@ namespace MaicoLand.Repositories
 
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
-
+                
             _landPlanningCollection = database.GetCollection<LandPlanning>("LandPlanning");
 
         }
 
-        public  PagedList<LandPlanning> Get(PagingParameter pagingParameter)
+        public  PagedList<String> Get(PagingParameter pagingParameter)
         {
             return PagedList<LandPlanning>.ToLandPagedList(_landPlanningCollection.AsQueryable<LandPlanning>(), pagingParameter.pageNumber, pagingParameter.pageSize);
 
@@ -66,16 +66,18 @@ namespace MaicoLand.Repositories
                 .Normalize(NormalizationForm.FormC);
         }
 
-        public List<LandPlanning> GetLandByKeyword(string key , string addressId1="",string addressId2="")
+        public List<String> GetLandByKeyword(string key , string addressId1="",string addressId2="")
         {
            
             return _landPlanningCollection.AsQueryable<LandPlanning>().Where(a =>
 
-            (a.Title.Contains(key))&& (a.Address.IdLevel1.Contains(addressId1))&&(a.Address.IdLevel2.Contains(addressId2)) ).ToList();
+            (a.Title.Contains(key))&& (a.Address.IdLevel1.Contains(addressId1))&&(a.Address.IdLevel2.Contains(addressId2)) ).Select((a)=>a.Id).ToList();
 
 
         }
  
-        public List<LandPlanning> GetLandByAuthorId(string id)=> _landPlanningCollection.AsQueryable<LandPlanning>().Where(a => a.CreatedBy == id).ToList();
+        public List<String> GetLandByAuthorId(string id)=> _landPlanningCollection.AsQueryable<LandPlanning>().Where(a => a.CreatedBy == id).Select((a) => a.Id).ToList();
+
+
     }
 }

@@ -25,35 +25,38 @@ namespace MaicoLand.Models
             AddRange(items);
         }
 
-        public static PagedList<News> ToNewsPagedList(IQueryable<News> source , int pageNumber, int pageSize)
+        public static PagedList<String> ToNewsPagedList(IQueryable<News> source , int pageNumber, int pageSize)
         {
             var count = source.Count();
             var items = source
                 .Skip((pageNumber - 1) * pageSize).OrderByDescending(a=> a.CreatedDate)
                            
                          .Take(pageSize)
+                         .Select((a)=> a.Id)
                          .ToList();
-            return new PagedList<News>(items, count, pageNumber, pageSize);
+            return new PagedList<String>(items, count, pageNumber, pageSize);
         }
-        public static PagedList<LandPlanning> ToLandPagedList(IQueryable<LandPlanning> source, int pageNumber, int pageSize)
+        public static PagedList<String> ToLandPagedList(IQueryable<LandPlanning> source, int pageNumber, int pageSize)
         {
             var count = source.Count();
             var items = source
                 .Skip((pageNumber - 1) * pageSize).OrderByDescending(a => a.CreatedDate)
 
                          .Take(pageSize)
+                            .Select((a) => a.Id)
                          .ToList();
-            return new PagedList<LandPlanning>(items, count, pageNumber, pageSize);
+            return new PagedList<String>(items, count, pageNumber, pageSize);
         }
-        public static PagedList<SalePost> ToSalePostPagedList(IQueryable<SalePost> source, int pageNumber, int pageSize)
+        public static PagedList<String> ToSalePostPagedList(IQueryable<SalePost> source, int pageNumber, int pageSize)
         {
             var count = source.Count();
             var items = source
                 .Skip((pageNumber - 1) * pageSize).OrderByDescending(a => a.CreatedDate)
 
                          .Take(pageSize)
+                            .Select((a) => a.Id)
                          .ToList();
-            return new PagedList<SalePost>(items, count, pageNumber, pageSize);
+            return new PagedList<String>(items, count, pageNumber, pageSize);
         }
 
     }

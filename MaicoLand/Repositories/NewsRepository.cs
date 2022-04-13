@@ -24,9 +24,9 @@ namespace MaicoLand.Repositories
             _newsCollection = database.GetCollection<News>("News");
         }
 
-        public  PagedList<News> Get(PagingParameter pagingParameter)
+        public  PagedList<String> Get(PagingParameter pagingParameter)
         {
-            return PagedList<News>.ToNewsPagedList(_newsCollection.AsQueryable<News>(), pagingParameter.pageNumber, pagingParameter.pageSize);
+            return PagedList<String>.ToNewsPagedList(_newsCollection.AsQueryable<News>(), pagingParameter.pageNumber, pagingParameter.pageSize);
         }
 
         public async Task<News> GetAsync(string id) =>
@@ -43,11 +43,13 @@ namespace MaicoLand.Repositories
             await _newsCollection.DeleteOneAsync(x => x.Id == id);
        
 
-        public List<News> GetItemByKeyword(string key)
+        public List<String> GetItemByKeyword(string key)
         {
-            return _newsCollection.AsQueryable<News>().Where(a => (a.Title.Contains(key))).ToList();
+            return _newsCollection.AsQueryable<News>().Where(a => (a.Title.Contains(key))).Select((a)=>a.Id).ToList();
         }
 
-        public List<News> GetItemByAuthorId(string id)=> _newsCollection.AsQueryable<News>().Where(a => a.CreatedBy == id).ToList();
+        public List<String> GetItemByAuthorId(string id)=> _newsCollection.AsQueryable<News>().Where(a => a.CreatedBy == id).Select((a)=> a.Id).ToList();
+
+    
     }
 }

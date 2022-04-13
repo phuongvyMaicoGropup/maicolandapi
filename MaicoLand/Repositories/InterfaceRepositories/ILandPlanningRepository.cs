@@ -10,7 +10,7 @@ namespace MaicoLand.Repositories.InterfaceRepositories
 {
     public interface ILandPlanningRepository
     {
-        public PagedList<LandPlanning> Get(PagingParameter pagingParameter);
+        public PagedList<String> Get(PagingParameter pagingParameter);
 
         public Task<LandPlanning> GetAsync(string id);
         public Task CreateAsync(LandPlanning newLandPlanning);
@@ -18,8 +18,8 @@ namespace MaicoLand.Repositories.InterfaceRepositories
         public Task UpdateAsync(string id, LandPlanning updatedLandPlanning);
 
         public Task RemoveAsync(string id);
-        public List<LandPlanning> GetLandByKeyword(string key, string addressId1, string addressId2);
-        public List<LandPlanning> GetLandByAuthorId(string id); 
+        public List<String> GetLandByKeyword(string key, string addressId1, string addressId2);
+        public List<String> GetLandByAuthorId(string id); 
 
 
 

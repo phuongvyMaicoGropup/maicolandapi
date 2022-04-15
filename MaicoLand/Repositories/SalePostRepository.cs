@@ -38,6 +38,10 @@ namespace MaicoLand.Repositories
         public List<String> GetItemByAuthorId(string id)=> collection.AsQueryable<SalePost>().Where(a => a.CreatedBy == id).Select((a=> a.Id)).ToList();
         public List<String> GetItemByKeyword(string key)=> collection.AsQueryable<SalePost>().Where(a => (a.Title.Contains(key))).Select((a => a.Id)).ToList();
 
+        public List<string> GetTopSavedNews()=> collection.AsQueryable<SalePost>().OrderBy(a=> a.Saved).Select((a => a.Id)).Take(5).ToList();
+
+        public List<string> GetTopViewedNews() => collection.AsQueryable<SalePost>().OrderBy(a => a.Views).Select((a => a.Id)).Take(5).ToList();
+
         public async Task RemoveAsync(string id)=> await collection.DeleteOneAsync(x => x.Id == id);
 
         public async Task UpdateAsync(string id, SalePost updatedItem)=>await collection.ReplaceOneAsync(x => x.Id == id, updatedItem);

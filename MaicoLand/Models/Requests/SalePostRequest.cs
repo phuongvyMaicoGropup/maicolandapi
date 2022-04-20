@@ -20,7 +20,7 @@ namespace MaicoLand.Models.Requests
         public double Cost { set; get; }
         public List<string> Images { set; get; } = new List<string>();
         public string CreatedBy { set; get; }
-        public SalePostType Type { set; get; }
+        public int Type { set; get; }
         public bool IsPrivate { set; get; }
     }
 }

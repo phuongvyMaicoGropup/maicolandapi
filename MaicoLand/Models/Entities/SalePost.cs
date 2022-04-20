@@ -43,7 +43,7 @@ namespace MaicoLand.Models
         [BsonElement]
         public DateTime UpdatedDate { set; get; }
         [BsonElement]
-        public SalePostType Type { set; get; }
+        public int Type { set; get; }
         [BsonElement]
         public int Views { set; get; }
         [BsonElement]
